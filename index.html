@@ -1274,6 +1274,20 @@ async function thumb(id){
 function openViewer(u){const v=$('viewer');v.querySelector('img').src=u;v.style.display='flex'}
 $('viewer').onclick=()=>{$('viewer').style.display='none'};
 
+// あとから写真を付ける・差し替える（記録の写真が見つからないときも、元の写真を選び直せる）
+const pf=document.createElement('input');pf.type='file';pf.accept='image/*';pf.hidden=true;$('viewer').after(pf);
+let pfTarget=null;
+const pickPhoto=r=>{pfTarget=r;pf.click()};
+pf.onchange=async e=>{
+  const f=e.target.files[0],r=pfTarget;e.target.value='';pfTarget=null;
+  if(!f||!r)return;
+  try{
+    const key=r.photo||r.id;
+    await putPhoto(key,await shrink(f));
+    r.photo=key;urls.delete(key);persist();renderList();
+  }catch(err){alert('写真を保存できませんでした')}
+};
+
 async function renderList(){
   const box=$('p_list');box.textContent='';
   if(!recs.length){const e=document.createElement('div');e.className='empty';e.textContent='まだ記録がないのだ';box.append(e);return}
@@ -1286,7 +1300,10 @@ async function renderList(){
       for(let i=0;i<list.length;i++){
         const r=list[i],row=document.createElement('div');row.className='rank'+(i===0?' best':'');
         const u=await thumb(r.photo);
-        if(u){const im=document.createElement('img');im.src=u;im.alt='';im.onclick=()=>openViewer(u);row.append(im)}else{const p=document.createElement('div');p.className='ph';row.append(p)}
+        if(u){const im=document.createElement('img');im.src=u;im.alt='';im.onclick=()=>openViewer(u);row.append(im)}
+        else{const p=document.createElement('button');p.type='button';p.className='ph';p.textContent='📷';p.setAttribute('aria-label','写真を付ける');
+          p.style.cssText='display:grid;place-items:center;padding:0;border:2px dashed var(--line);border-radius:8px;background:none;box-shadow:none;font-size:18px;color:var(--sub)';
+          p.onclick=()=>pickPhoto(r);row.append(p)}
         const st=document.createElement('div');st.className='st';
         st.append(document.createTextNode((i===0?'★ ':'')+r.store));
         const sm=document.createElement('small');
@@ -1310,7 +1327,8 @@ async function renderList(){
         if(r.photo){urls.delete(r.photo);try{await delPhoto(r.photo)}catch(e){}}
         renderList();fillLists();updateVerdict();
       };
-      h2.append(s,d);det.append(h2);
+      const cam=document.createElement('button');cam.textContent='📷';cam.setAttribute('aria-label','写真を付ける・差し替える');cam.onclick=()=>pickPhoto(r);
+      h2.append(s,cam,d);det.append(h2);
     }
     card.append(det);box.append(card);
   }

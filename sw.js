@@ -1,4 +1,4 @@
-const CACHE = 'zunda-kaimono-v1';
+const CACHE = 'zunda-kaimono-v2';
 const FILES = ['./', './index.html', './manifest.webmanifest', './stores.json', './icon-180.png', './icon-192.png', './icon-512.png', './dela.woff2', './zun-normal.png', './zun-smile.png', './zun-surprise.png'];
 
 self.addEventListener('install', e => {
