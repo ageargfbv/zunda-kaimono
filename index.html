@@ -1,0 +1,1717 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ずんだ買い物</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
+<meta name="theme-color" content="#55b834">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="ずんだ買い物">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<style>
+:root{--bg:#f2f9e6;--card:#fff;--card2:#eef6df;--fg:#1d2b12;--sub:#6a7a58;--acc:#4aa52e;--acc2:#8bd44a;--gd:#2f7d1e;--soft:#e2f5bd;--line:#dfeccb;--good:#2f8f3e;--bad:#d64545;--warn:#b7791f;--shadow:0 5px 0 var(--line),0 8px 18px rgba(50,90,20,.14);--tab:66px;--danger:#e5484d}
+@media (prefers-color-scheme:dark){:root{--bg:#11190d;--card:#1b2615;--card2:#243020;--fg:#eef5e6;--sub:#a3b394;--acc:#6cc24a;--acc2:#4aa52e;--gd:#9be36f;--soft:#26401b;--line:#2c3a24;--good:#6cc24a;--bad:#ff8a8a;--warn:#ecc94b;--shadow:0 5px 0 #0a1007,0 8px 18px rgba(0,0,0,.4)}}
+@font-face{font-family:"Dela Gothic One";src:url(dela.woff2) format("woff2");font-display:swap}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+*{touch-action:manipulation}
+html{background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,"Hiragino Sans","Yu Gothic",sans-serif;padding-bottom:calc(var(--tab) + env(safe-area-inset-bottom) + 24px);-webkit-text-size-adjust:100%}
+#appM button{font:inherit;border:0;background:none;color:inherit;padding:0;cursor:pointer}
+#appM input{font:inherit;color:var(--fg)}
+#appM .hd{background:linear-gradient(135deg,#55b834,#8bd44a);color:#fff;padding:calc(env(safe-area-inset-top) + 12px) 16px 14px;border-radius:0 0 20px 20px;box-shadow:0 4px 0 rgba(47,125,30,.35)}
+#appM .hd-in{max-width:560px;margin:0 auto}
+#appM .top{display:flex;align-items:center;justify-content:space-between}
+#appM .logo{display:flex;align-items:center;gap:8px;font:400 21px/1 "Dela Gothic One",sans-serif;text-shadow:0 2px 0 rgba(30,80,10,.35)}
+#appM .logo i{width:34px;height:34px;border-radius:10px;background:#fff;display:grid;place-items:center;font-style:normal;font-size:19px;text-shadow:none}
+#appM .ico{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.28);font-size:15px;display:grid;place-items:center;color:#fff}
+#appM .ico:active{background:rgba(255,255,255,.45)}
+#appM .pg{margin-top:10px;height:6px;border-radius:99px;background:rgba(255,255,255,.4);overflow:hidden}
+#appM .pg i{display:block;height:100%;width:0;border-radius:99px;background:#fff;transition:width .45s cubic-bezier(.2,.8,.2,1)}
+#appM main{max-width:560px;margin:0 auto;padding:12px 16px 0}
+#appM .bub{display:flex;gap:12px;align-items:center;margin:4px 0 12px;width:100%;text-align:left;padding:0}
+#appM .av{flex:none;width:64px;height:64px;border-radius:50%;background:#e2f5bd url(zun-normal.png) 0 0/105% auto no-repeat;border:3px solid #fff;box-shadow:0 3px 0 rgba(30,80,10,.22),0 0 0 3px #c4ec6f}
+#appM .av.w{background-image:url(zun-surprise.png)}
+#appM .say{position:relative;background:var(--card);color:var(--fg);border-radius:18px;padding:9px 13px;font-weight:800;font-size:14px;line-height:1.4;box-shadow:0 3px 0 var(--line)}
+#appM .say:before{content:"";position:absolute;left:-8px;top:50%;margin-top:-8px;border:8px solid transparent;border-right-color:var(--card);border-left:0}
+#appM .say b{color:var(--gd)}
+#appM .fin{text-align:center;padding:8px 0 4px}
+#appM .fin img{height:215px;display:block;margin:0 auto;filter:drop-shadow(0 6px 0 rgba(60,110,30,.22))}
+#appM .fin .say2{display:inline-block;margin-top:10px;background:var(--card);border-radius:20px;padding:10px 16px;font:400 20px/1.35 "Dela Gothic One",sans-serif;box-shadow:0 4px 0 var(--line)}
+#appM .fin p{font-weight:800;color:var(--sub);font-size:13px;margin:8px 0 0}
+#appM .credit{text-align:center;color:var(--sub);font-size:11px;margin:28px 0 8px}
+#appM .add{display:flex;gap:8px;background:var(--card);border-radius:18px;padding:6px 6px 6px 16px;box-shadow:var(--shadow);align-items:center}
+#appM .add input{flex:1;min-width:0;border:0;background:none;outline:0;padding:10px 0;font-size:17px}
+#appM .add input::placeholder{color:var(--sub)}
+[hidden]{display:none!important}
+#appM .pick{background:var(--card);border-radius:16px;padding:8px 14px 10px;margin-top:10px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+#appM .pkrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:6px 0}
+#appM .pkrow .lb{width:100%;font-size:12px;color:var(--sub);font-weight:700}
+#appM .pkrow input{flex:1;min-width:130px;border:1px solid var(--line);background:var(--card2);border-radius:99px;padding:7px 13px;font-size:16px;outline:0}
+#appM .add .stbtn{width:auto;max-width:132px;height:36px;padding:0 12px;border-radius:99px;background:var(--card2);color:var(--fg);font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
+#appM .add .stbtn.on{background:var(--soft);color:var(--acc)}
+#appM .add button{width:44px;height:44px;border-radius:14px;background:var(--acc);color:#fff;font-size:26px;line-height:1;display:grid;place-items:center;transition:transform .12s}
+#appM .add button:active{transform:scale(.92)}
+#appM .sug{display:flex;gap:8px;overflow-x:auto;padding:12px 0 2px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+#appM .sug::-webkit-scrollbar{display:none}
+#appM .sug:empty{display:none}
+#appM .sug .lb{flex:none;align-self:center;font-size:12px;color:var(--sub);padding-right:2px}
+#appM .chip{flex:none;padding:7px 13px;border-radius:99px;background:var(--card);border:1px solid var(--line);font-size:14px;white-space:nowrap}
+#appM .chip:active{background:var(--soft);border-color:var(--acc)}
+#appM .grp{margin-top:18px}
+#appM .gh{display:flex;align-items:center;gap:8px;padding:0 4px 8px;font-size:13px;font-weight:700;color:var(--sub)}
+#appM .gh .e{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:14px;background:var(--card);border:2px solid var(--c,var(--line))}
+#appM .gh .n{margin-left:auto;font-weight:600;font-size:12px}
+#appM .cardlist{background:var(--card);border-radius:16px;box-shadow:0 1px 3px rgba(0,0,0,.05);overflow:hidden}
+#appM .row{position:relative;overflow:hidden}
+#appM .row+.row{border-top:1px solid var(--line)}
+#appM .swbg{position:absolute;inset:0;background:var(--danger);opacity:0;display:flex;align-items:center;justify-content:flex-end;padding-right:22px;color:#fff;font-weight:700;font-size:14px}
+#appM .front{position:relative;display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--card);transition:transform .22s cubic-bezier(.2,.8,.2,1),opacity .2s;touch-action:pan-y}
+#appM .chk{flex:none;width:28px;height:28px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;color:transparent;font-size:16px;font-weight:800;transition:background .18s,border-color .18s,transform .18s}
+#appM .chk:active{transform:scale(.88)}
+#appM .row .chk{border-color:#b9cfa0}
+#appM .row.done .chk{background:var(--acc);border-color:var(--acc);color:#fff}
+#appM .row.pop .chk{transform:scale(1.18)}
+#appM .row.pop .front{opacity:.35}
+#appM .body{flex:1;min-width:0}
+#appM .name{font-size:16.5px;font-weight:600;line-height:1.35;word-break:break-word}
+#appM .row.done .name{text-decoration:line-through;color:var(--sub);font-weight:500}
+#appM .meta{display:flex;flex-wrap:wrap;gap:4px 8px;margin-top:2px;font-size:12.5px;color:var(--sub);line-height:1.35}
+#appM .meta:empty{display:none}
+#appM .meta .q{background:var(--soft);color:var(--acc);border-radius:6px;padding:0 6px;font-weight:700}
+#appM .meta .p{color:var(--acc);font-weight:600}
+#appM .meta .p .old{color:#b7791f;font-weight:500}
+#appM .meta .m{color:var(--sub)}
+#appM .more{flex:none;color:var(--sub);font-size:20px;padding:4px 2px;letter-spacing:1px}
+#appM .dh{display:flex;align-items:center;margin:22px 0 8px;padding:0 4px;color:var(--sub);font-size:13px;font-weight:700}
+#appM .dh .tg{display:flex;align-items:center;gap:6px}
+#appM .dh .tg span{transition:transform .2s}
+#appM .dh.closed .tg span{transform:rotate(-90deg)}
+#appM .dh .clr{margin-left:auto;color:var(--danger);font-weight:600;font-size:13px;padding:6px 4px}
+#appM .cardlist.dim{opacity:.85}
+#appM .empty{text-align:center;color:var(--sub);padding:44px 0 20px}
+#appM .empty .big{font-size:56px;line-height:1;margin-bottom:8px}
+.tabs{position:fixed;left:0;right:0;bottom:0;display:flex;background:color-mix(in srgb,var(--card) 88%,transparent);background:var(--card);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom);z-index:20}
+.tabs a{flex:1;height:var(--tab);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-decoration:none;color:var(--sub);font-size:11px;font-weight:600}
+.tabs a .i{font-size:22px;line-height:1}
+.tabs a.cur{color:var(--acc)}
+#appM #ov{position:fixed;inset:0;background:rgba(0,0,0,.42);opacity:0;pointer-events:none;transition:opacity .22s;z-index:30}
+#appM #ov.open{opacity:1;pointer-events:auto}
+#appM #sheet,#appM #sheet2{position:fixed;left:0;right:0;bottom:0;z-index:31;background:var(--card);border-radius:22px 22px 0 0;padding:10px 18px calc(env(safe-area-inset-bottom) + 18px);transform:translateY(105%);visibility:hidden;transition:transform .28s cubic-bezier(.2,.8,.2,1),visibility 0s .28s;max-width:560px;margin:0 auto;box-shadow:0 -10px 40px rgba(0,0,0,.25);max-height:92vh;overflow:auto}
+#appM #sheet.open,#appM #sheet2.open{transform:none;visibility:visible;transition-delay:0s}
+#appM .tools{display:flex;gap:8px}
+#appM .warn{display:block;width:100%;margin-top:12px;text-align:left;background:#fff4dc;color:#8a5a00;border-radius:14px;padding:10px 14px;font-size:14px;font-weight:600}
+@media (prefers-color-scheme:dark){#appM .warn{background:#3a2f12;color:#f3c76a}}
+#appM .seg{display:flex;gap:8px;margin-bottom:10px}
+#appM .seg button{flex:1;padding:10px 4px;border-radius:12px;background:var(--card2);font-weight:700;font-size:13.5px;color:var(--sub);white-space:nowrap}
+#appM .seg button.on{background:var(--acc);color:#fff}
+#appM .srow{display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
+#appM .sname{flex:1;min-width:0}
+#appM .sname b{display:block;font-size:16px}
+#appM .sname .sub{display:block;font-size:12.5px;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#appM .sname .late{color:var(--danger);font-weight:700}
+#appM .sname .soon{color:#b7791f;font-weight:700}
+#appM .sadd{flex:none;padding:9px 14px;border-radius:12px;background:var(--acc);color:#fff;font-weight:700;font-size:14px}
+#appM .sdel{flex:none;color:var(--sub);padding:8px;font-size:16px}
+#appM .sform{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+#appM .sform .fld{flex:1;min-width:140px}
+#appM .stk{color:#b7791f;font-weight:600}
+#appM .srow .chk{border-color:#b9cfa0}
+#appM .srow .chk.on{background:var(--acc);border-color:var(--acc);color:#fff}
+#appM .srow.have{opacity:.5}
+#appM .srow .sub.g{color:var(--acc);font-weight:700}
+#appM .sel{flex:none;max-width:108px;border:2px solid var(--line);background:var(--card2);color:var(--fg);border-radius:99px;padding:5px 8px;font:700 12px system-ui,sans-serif}
+#appM .gl{display:flex;align-items:center;font-size:12px;font-weight:800;color:var(--sub);margin:16px 2px 0;width:100%;text-align:left}
+#appM .gl .n{margin-left:auto}
+#appM .gl .ar{display:inline-block;margin-right:6px;transition:transform .2s}
+#appM .gl.closed .ar{transform:rotate(-90deg)}
+#appM .wide{display:block;width:100%;margin-top:16px;padding:14px;border-radius:16px;background:var(--acc);color:#fff;font:400 16px "Dela Gothic One",sans-serif;text-align:center;box-shadow:0 4px 0 var(--gd)}
+#appM .wide:disabled{opacity:.45;box-shadow:none}
+#appM .dchip{display:inline-flex;align-items:center;gap:2px;flex:none;background:var(--card);border:2px solid var(--acc2);border-radius:99px;padding:0 4px 0 13px;font-size:14px;white-space:nowrap}
+#appM .dchip button{padding:7px 0}
+#appM .dchip .x{color:var(--sub);padding:7px 9px;font-size:13px}
+#appM .dchip small{color:var(--sub);font-size:11.5px;margin-left:4px}
+#appM #ask{position:fixed;left:50%;bottom:calc(var(--tab) + env(safe-area-inset-bottom) + 14px);transform:translate(-50%,20px);background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:16px;padding:10px 12px;display:flex;gap:8px;align-items:center;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:40;width:calc(100% - 24px);max-width:536px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+#appM #ask.on{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+#appM #ask span{flex:1;min-width:0;line-height:1.3}
+#appM #ask input{width:84px;border:1px solid var(--line);background:var(--card2);border-radius:10px;padding:9px 10px;font-size:17px;outline:0;text-align:right}
+#appM #ask #askOk{background:var(--acc);color:#fff;border-radius:10px;padding:9px 14px;font-weight:700}
+#appM #ask #askX{color:var(--sub);padding:6px}
+#appM .grab{width:40px;height:5px;border-radius:99px;background:var(--line);margin:0 auto 12px}
+#appM .fld{display:block;width:100%;border:1px solid var(--line);background:var(--card2);border-radius:12px;padding:12px 14px;font-size:17px;outline:0}
+#appM .fld:focus{border-color:var(--acc)}
+#appM .lbl{font-size:12px;color:var(--sub);font-weight:700;margin:16px 2px 6px}
+#appM .qty{display:flex;align-items:center;gap:14px}
+#appM .qty button{width:44px;height:44px;border-radius:12px;background:var(--card2);font-size:22px;font-weight:700}
+#appM .qty button:active{background:var(--soft)}
+#appM .qty b{min-width:40px;text-align:center;font-size:22px}
+#appM .cats{display:flex;flex-wrap:wrap;gap:8px}
+#appM .chip.on{background:var(--acc);border-color:var(--acc);color:#fff}
+#appM .meta .p.w{color:#b7791f}
+#appM .meta .st{border-radius:6px;padding:0 6px;font-weight:700}
+#appM .bh{display:flex;align-items:center;margin:24px 4px 0;font-size:15px;font-weight:800}
+#appM .bh .n{margin-left:auto;font-size:12px;font-weight:600;color:var(--sub)}
+#appM .bh.fold{width:calc(100% - 8px);text-align:left;color:var(--sub)}
+#appM .bh.fold .ar{display:inline-block;margin-right:6px;transition:transform .2s}
+#appM .bh.fold.closed .ar{transform:rotate(-90deg)}
+#appM .none{text-align:center;color:var(--sub);padding:28px 0 4px}
+#appM .acts{display:flex;gap:10px;margin-top:20px}
+#appM .acts button{flex:1;padding:14px;border-radius:14px;font-weight:700;font-size:16px}
+#appM .acts .del{background:var(--card2);color:var(--danger)}
+#appM .acts .ok{background:var(--acc);color:#fff;flex:2}
+#appM #toast{position:fixed;left:50%;bottom:calc(var(--tab) + env(safe-area-inset-bottom) + 14px);transform:translate(-50%,20px);background:#26302a;color:#fff;border-radius:14px;padding:11px 16px;display:flex;gap:14px;align-items:center;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:40;max-width:calc(100% - 32px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+#appM #toast.on{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+#appM #toast button{color:#7ee2a8;font-weight:700;white-space:nowrap}
+#appM .bk{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center;margin:22px 0 4px;font-size:12px;color:var(--sub);font-weight:700}
+#appM .bk button{padding:5px 12px;font-size:12px;border-radius:99px;background:var(--card);color:var(--gd);box-shadow:none;border:2px solid var(--line);font-weight:800}
+#appP .hd{background:linear-gradient(135deg,#55b834,#8bd44a);color:#fff;padding:calc(env(safe-area-inset-top) + 12px) 16px 14px;border-radius:0 0 20px 20px;box-shadow:0 4px 0 rgba(47,125,30,.35)}
+#appP .hd-in{max-width:520px;margin:0 auto}
+#appP .top{display:flex;align-items:center;justify-content:space-between}
+#appP .logo{display:flex;align-items:center;gap:8px;font:400 21px/1 "Dela Gothic One",sans-serif;text-shadow:0 2px 0 rgba(30,80,10,.35)}
+#appP .logo i{width:34px;height:34px;border-radius:10px;background:#fff;display:grid;place-items:center;font-style:normal;font-size:19px;text-shadow:none}
+#appP .tools{display:flex;gap:7px}
+#appP .ico{width:34px;height:34px;padding:0;border-radius:50%;background:rgba(255,255,255,.28);font-size:16px;display:grid;place-items:center;color:#fff;box-shadow:none}
+#appP .ico:active{background:rgba(255,255,255,.45);transform:none;box-shadow:none}
+#appP .ico.keyed{background:#fff;color:var(--gd)}
+#appP .hd .pg{margin-top:10px;height:6px;border-radius:99px;background:rgba(255,255,255,.4)}
+#appP main{max-width:520px;margin:0 auto;padding:12px 16px 0}
+#appP .seg{display:flex;gap:8px;margin:0 0 12px}
+#appP .seg button{flex:1;padding:11px;border-radius:14px;background:var(--card);color:var(--sub);border:2px solid var(--line);font-weight:800;box-shadow:0 3px 0 var(--line)}
+#appP .seg button.on{background:var(--acc);border-color:var(--acc);color:#fff;box-shadow:0 3px 0 var(--gd)}
+#appP input.auto{border-color:var(--acc)!important;border-width:2px}
+#appP button,#appP select,#appP input{font:inherit}
+#appP button{border:0;border-radius:14px;padding:12px 16px;background:var(--acc);color:#fff;font-weight:800;box-shadow:0 4px 0 var(--gd)}
+#appP button:active{transform:translateY(2px);box-shadow:0 2px 0 var(--gd)}
+#appP input,#appP select{width:100%;min-width:0;padding:12px;border:2px solid var(--line);border-radius:14px;background:var(--card);color:var(--fg)}
+#appP input:focus,#appP select:focus{outline:0;border-color:var(--acc)}
+#appP .row{display:flex;gap:8px;margin-bottom:8px}
+#appP .row>*{flex:1}
+#appP .row>.narrow{flex:0 0 96px}
+#appP .card{background:var(--card);border-radius:18px;padding:12px 14px;margin-bottom:14px;box-shadow:var(--shadow)}
+#appP .photo{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+#appP .photo label{flex:1;text-align:center;padding:12px;border:2px dashed #b9cfa0;border-radius:14px;color:var(--sub);font-weight:800}
+#appP .photo img{width:64px;height:64px;object-fit:cover;border-radius:12px}
+#appP #verdict{display:flex;gap:12px;align-items:center;border-radius:18px;padding:12px 14px;margin:4px 0 14px;background:var(--card);border:3px solid var(--line);box-shadow:0 4px 0 var(--line)}
+#appP #verdict .av{flex:none;width:64px;height:64px;border-radius:50%;background:#e2f5bd url(zun-normal.png) 0 0/105% auto no-repeat;border:3px solid #fff;box-shadow:0 3px 0 rgba(30,80,10,.22),0 0 0 3px #c4ec6f}
+#appP #verdict.good .av{background-image:url(zun-smile.png)}
+#appP #verdict.bad .av{background-image:url(zun-surprise.png)}
+#appP #verdict .tx{flex:1;min-width:0}
+#appP #verdict .big{font-size:18px;font-weight:800;line-height:1.3}
+#appP #verdict .sm{font-size:14px;color:var(--sub);margin-top:4px;white-space:pre-line;word-break:break-all;font-weight:500}
+#appP #verdict.good{border-color:var(--good)}
+#appP #verdict.good .big{color:var(--good)}
+#appP #verdict.bad{border-color:var(--bad)}
+#appP #verdict.bad .big{color:var(--bad)}
+#appP #verdict.warn{border-color:var(--warn)}
+#appP #verdict.warn .big{color:var(--warn)}
+#appP .item h2{font-size:17px;margin:0 0 8px;font-weight:800}
+#appP .rank{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:2px solid #f0f6e4}
+#appP .rank img{width:44px;height:44px;object-fit:cover;border-radius:8px;flex:none}
+#appP .rank .ph{width:44px;height:44px;flex:none}
+#appP .rank .st{flex:1;min-width:0;font-weight:700}
+#appP .rank .st small{display:block;color:var(--sub);font-weight:500}
+#appP .rank .up{font-weight:800;text-align:right}
+#appP .rank.best .up{color:var(--good)}
+#appP .old{color:var(--warn)}
+#appP details{margin-top:8px;color:var(--sub);font-size:14px}
+#appP summary{cursor:pointer;font-weight:700}
+#appP .hist{display:flex;align-items:center;gap:8px;padding:6px 0;border-top:2px solid #f0f6e4}
+#appP .hist span{flex:1}
+#appP .hist button{background:none;color:var(--sub);padding:2px 8px;box-shadow:none}
+#appP .empty{color:var(--sub);text-align:center;padding:32px 0;font-weight:700}
+#appP .credit{text-align:center;color:var(--sub);font-size:11px;margin:28px 0 8px}
+#appP #viewer{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;align-items:center;justify-content:center;z-index:9}
+#appP #viewer img{max-width:100%;max-height:100%}
+#appP .bk{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center;margin:22px 0 4px;font-size:12px;color:var(--sub);font-weight:700}
+#appP .bk button{padding:5px 12px;font-size:12px;border-radius:99px;background:var(--card);color:var(--gd);box-shadow:none;border:2px solid var(--line);font-weight:800}
+.tabs.p a{font-weight:800}
+.tabs a{cursor:pointer}
+</style>
+</head>
+<body>
+<script>window.ZAPP=(location.hash==='#p'||location.hash==='#price')?'p':'m';</script>
+<!-- 買い物メモ（旧 shopping-memo） -->
+<div id="appM">
+<header class="hd">
+  <div class="hd-in">
+    <div class="top">
+      <div class="logo"><i>🛒</i>ずんだメモ</div>
+      <div class="tools">
+        <button class="ico" id="bSets" aria-label="セット">📋</button>
+        <button class="ico" id="bReg" aria-label="定番">🔁</button>
+        <button class="ico" id="bStock" aria-label="うちにある物">🧊</button>
+        <button class="ico" id="share" aria-label="リストを共有">⤴</button>
+      </div>
+    </div>
+    <div class="pg"><i id="bar"></i></div>
+  </div>
+</header>
+<main>
+  <button class="bub" id="bub" type="button"><div class="av" id="av"></div><div class="say" id="say"></div></button>
+  <div class="fin" id="fin" hidden><img src="zun-smile.png" alt=""><div class="say2">ぜんぶ買えたのだ！<br>えらいのだ！</div><p id="finTxt"></p></div>
+  <form id="f" class="add" autocomplete="off">
+    <input id="t" placeholder="買うものを足すのだ" enterkeyhint="done" autocapitalize="none" autocomplete="off" aria-label="買うもの">
+    <button type="button" class="stbtn" id="addSt" aria-label="買う店を選ぶ">🏪 おまかせ</button>
+    <button aria-label="追加">＋</button>
+  </form>
+  <div class="pick" id="addStRow" hidden></div>
+  <div class="sug" id="tstore"></div>
+  <div class="sug" id="due"></div>
+  <div class="sug" id="sug"></div>
+  <div id="list"></div>
+  <section id="doneSec" hidden>
+    <div class="dh" id="dh"><button class="tg" id="dtg"><span>▾</span><b id="dcnt"></b></button><button class="clr" id="clr">済みを消すのだ</button></div>
+    <div class="cardlist dim" id="done"></div>
+  </section>
+  <div class="bk"><span id="bkSt"></span><button id="bkSet" type="button">設定</button><button id="bkNow" type="button">今すぐ</button><button id="bkRestore" type="button">戻す</button></div>
+<p class="credit">立ち絵：坂本アヒルさん</p>
+</main>
+<div id="ov"></div>
+<div id="sheet" role="dialog" aria-modal="true" aria-label="編集">
+  <div class="grab"></div>
+  <input class="fld" id="sName" aria-label="品名" autocomplete="off">
+  <div class="lbl">数</div>
+  <div class="qty"><button id="qm" aria-label="減らす">−</button><b id="qn">1</b><button id="qp" aria-label="増やす">＋</button></div>
+  <div class="lbl">売り場</div>
+  <div class="cats" id="cats"></div>
+  <div class="lbl">買う店</div>
+  <div class="cats" id="stores"></div>
+  <input class="fld" id="sStore" placeholder="店を追加（例：サンディ）" autocomplete="off" aria-label="店を追加" style="margin-top:8px">
+  <div class="lbl">定番</div>
+  <div class="cats"><button class="chip" id="sReg" type="button"></button></div>
+  <div class="lbl">メモ</div>
+  <input class="fld" id="sMemo" placeholder="例：国産、赤" autocomplete="off" aria-label="メモ">
+  <div class="acts"><button class="del" id="sDel">削除</button><button class="ok" id="sOk">完了</button></div>
+</div>
+<div id="sheet2" role="dialog" aria-modal="true" aria-label="セットとうちにある物">
+  <div class="grab"></div>
+  <div class="seg"><button id="m1">📋 セット</button><button id="m3">🔁 定番</button><button id="m2">🧊 うちにある物</button></div>
+  <div id="p2"></div>
+  <div class="acts"><button class="ok" id="s2Ok">閉じる</button></div>
+</div>
+<div id="ask"><span id="askMsg"></span><input id="askIn" type="number" inputmode="numeric" min="1" placeholder="円" aria-label="値段"><button id="askOk">記録</button><button id="askX" aria-label="閉じる">✕</button></div>
+<div id="toast"><span id="tmsg"></span><button id="tact" hidden></button></div>
+</div>
+<!-- 最安くらべ（旧 price-compare） -->
+<div id="appP" hidden>
+<header class="hd">
+  <div class="hd-in">
+    <div class="top">
+      <div class="logo"><i>🏷️</i>ずんだくらべ</div>
+      <div class="tools"><button class="ico" id="tabSet" aria-label="設定">⚙</button></div>
+    </div>
+  </div>
+</header>
+<main>
+<div class="seg">
+  <button id="tabCheck" class="on">買う前に</button>
+  <button id="tabList">一覧</button>
+  <button id="tabRcpt">レシート</button>
+</div>
+
+<section id="secCheck">
+  <div class="card">
+    <div class="photo">
+      <label>📷 値札を撮る<input id="file" type="file" accept="image/*" hidden></label>
+      <img id="prev" alt="" hidden>
+    </div>
+    <input id="item" list="items" placeholder="商品（例: 鶏むね肉）" autocomplete="off" style="margin-bottom:8px">
+    <datalist id="items"></datalist>
+    <input id="store" list="p_stores" placeholder="お店" autocomplete="off" style="margin-bottom:8px">
+    <datalist id="p_stores"></datalist>
+    <div id="storeChips" style="display:none;flex-wrap:wrap;gap:6px;margin:-2px 0 8px"></div>
+    <a id="appLink" href="#" target="_blank" rel="noopener" style="display:none;margin:-2px 0 8px;padding:6px 12px;font-size:13px;font-weight:800;border-radius:99px;border:2px solid var(--acc);color:var(--gd);text-decoration:none;background:var(--card)"></a>
+    <div class="row">
+      <input id="price" type="number" inputmode="decimal" min="0" placeholder="値段（円）">
+      <select id="tax" class="narrow"><option value="in">税込</option><option value="ex">税抜</option></select>
+    </div>
+    <div class="row">
+      <input id="qty" type="number" inputmode="decimal" min="0" placeholder="量">
+      <select id="unit" class="narrow"><option value="g">g</option><option value="kg">kg</option><option value="ml">ml</option><option value="L">L</option><option value="個">個・本</option></select>
+    </div>
+  </div>
+  <div id="verdict"><div class="av"></div><div class="tx"><div class="big">—</div></div></div>
+  <button id="save" style="width:100%">記録するのだ</button>
+</section>
+
+<section id="secList" hidden><div id="p_list"></div></section>
+
+<section id="secRcpt" hidden>
+  <div class="card">
+    <div class="photo"><label>📷 レシートを撮る<input id="rfile" type="file" accept="image/*" hidden></label></div>
+    <div id="rmsg" style="white-space:pre-line;font-size:13px;color:var(--sub);margin-top:8px"></div>
+  </div>
+  <div id="rout"></div>
+</section>
+<div class="bk"><span id="p_bkSt"></span><button id="p_bkSet" type="button">設定</button><button id="p_bkNow" type="button">今すぐ</button><button id="p_bkRestore" type="button">戻す</button><button id="homeSet" type="button">🏠 家</button></div>
+<p class="credit">立ち絵：坂本アヒルさん</p>
+</main>
+<div id="viewer"><img alt=""></div>
+</div>
+<nav class="tabs" id="zTabs">
+  <a id="tM" class="cur" role="button" href="#m"><span class="i">📝</span>買い物メモ</a>
+  <a id="tP" role="button" href="#p"><span class="i">🏷️</span>最安くらべ</a>
+</nav>
+
+<script>
+document.getElementById(window.ZAPP==='p'?'appM':'appP').hidden=true;
+document.getElementById(window.ZAPP==='p'?'appP':'appM').hidden=false;
+if(window.ZAPP==='p'){document.getElementById('tM').classList.remove('cur');document.getElementById('tP').classList.add('cur');document.getElementById('zTabs').classList.add('p');}
+</script>
+<script>
+(()=>{
+
+const KEY='shopping-memo-v1',HKEY='shopping-memo-hist-v1';
+const $=id=>document.getElementById(id);
+// 2026-09-30 本人の依頼：入力済みの情報をいったん全部消す。この端末で最初に開いた1回だけ（印を残すので、あとは消さない）。最安くらべの記録には触らない
+try{
+  if(localStorage.getItem('shopping-memo-reset')!=='2026-09-30'){
+    ['shopping-memo-v1','shopping-memo-hist-v1','shopping-memo-store-v1','shopping-memo-sets-v1','shopping-memo-stock-v1'].forEach(k=>localStorage.removeItem(k));
+    localStorage.setItem('shopping-memo-reset','2026-09-30');
+  }
+}catch(e){}
+const CATS=[
+  {id:'veg',name:'野菜・果物',ico:'🥬',c:'#2f9e5b',kw:['野菜','キャベツ','レタス','にんじん','人参','玉ねぎ','たまねぎ','玉葱','じゃがいも','ジャガイモ','トマト','きゅうり','キュウリ','なす','ナス','茄子','ほうれん草','ねぎ','ネギ','大根','白菜','ブロッコリー','ピーマン','もやし','きのこ','しいたけ','椎茸','えのき','しめじ','かぼちゃ','ごぼう','れんこん','アボカド','レモン','りんご','リンゴ','バナナ','みかん','ミカン','いちご','イチゴ','ぶどう','ブドウ','果物','フルーツ','柿','梨','桃','キウイ','にんにく','ニンニク','生姜','しょうが','小松菜','水菜','セロリ','パプリカ','オクラ','枝豆','とうもろこし','さつまいも','サツマイモ','里芋','ズッキーニ','カボチャ','ミニトマト','スイカ','メロン','みょうが','しそ','パセリ']},
+  {id:'dairy',name:'卵・乳・豆腐',ico:'🥚',c:'#f0a30a',kw:['牛乳','卵','たまご','玉子','ヨーグルト','チーズ','バター','豆腐','納豆','生クリーム','マーガリン','油揚げ','豆乳','厚揚げ']},
+  {id:'meat',name:'肉・魚',ico:'🥩',c:'#e5484d',kw:['肉','豚','牛','鶏','ひき肉','ハム','ベーコン','ソーセージ','ウインナー','魚','鮭','さけ','サバ','さば','鯖','ぶり','ブリ','えび','エビ','いか','イカ','たこ','タコ','刺身','あさり','しらす','ツナ','まぐろ','マグロ','鯛','たら','さんま','あじ','アジ','ちくわ','かまぼこ','明太子','たらこ']},
+  {id:'staple',name:'主食・調味料',ico:'🍚',c:'#c27c3a',kw:['米','パン','食パン','麺','うどん','そば','パスタ','スパゲッティ','ラーメン','小麦粉','砂糖','塩','醤油','しょうゆ','味噌','みそ','油','酢','みりん','だし','カレー','ルー','ソース','ケチャップ','マヨネーズ','ドレッシング','コショウ','胡椒','調味料','シリアル','ふりかけ','海苔','のり','缶','レトルト','乾麺','餅','もち','オートミール','ごま','はちみつ','ジャム']},
+  {id:'drink',name:'飲み物・お菓子',ico:'🥤',c:'#2d9cdb',kw:['お茶','茶','水','ミネラル','コーヒー','珈琲','紅茶','ジュース','炭酸','ビール','ワイン','酒','お菓子','チョコ','クッキー','アイス','スナック','ガム','飴','あめ','せんべい','ポテチ','ゼリー','プリン','ケーキ','コーラ']},
+  {id:'house',name:'日用品',ico:'🧴',c:'#8b5cf6',kw:['洗剤','シャンプー','リンス','コンディショナー','ティッシュ','トイレットペーパー','トイレ','ラップ','アルミ','ゴミ袋','ごみ袋','スポンジ','歯磨き','歯ブラシ','石鹸','せっけん','ハンドソープ','柔軟剤','マスク','電池','電球','綿棒','洗顔','化粧','カミソリ','キッチンペーパー','ペーパー','ボディソープ','ハンドクリーム','絆創膏','袋','ゴム手袋','漂白']},
+  {id:'other',name:'その他',ico:'🛒',c:'#8a9099',kw:[]}
+];
+const CAT=Object.fromEntries(CATS.map(c=>[c.id,c]));
+const guess=t=>{for(const c of CATS)if(c.kw.some(k=>t.includes(k)))return c.id;return 'other'};
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const h=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e};
+
+// ---- 保存 ----
+let items=[],hist={};
+try{const a=JSON.parse(localStorage.getItem(KEY)||'[]');if(Array.isArray(a))items=a}catch(e){}
+try{const o=JSON.parse(localStorage.getItem(HKEY)||'{}');if(o&&typeof o==='object'&&!Array.isArray(o))hist=o}catch(e){}
+// 前の版の {text,done} だけの記録もそのまま読める
+items=items.filter(x=>x&&typeof x.text==='string'&&x.text.trim()).map((x,i)=>({
+  id:x.id||uid(),text:x.text.trim(),done:!!x.done,
+  qty:x.qty>0?Math.min(99,Math.floor(x.qty)):1,memo:typeof x.memo==='string'?x.memo:'',store:typeof x.store==='string'?x.store.trim():'',
+  cat:CAT[x.cat]?x.cat:guess(x.text),ts:x.ts||Date.now()+i,doneTs:x.doneTs||0}));
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(items));localStorage.setItem(HKEY,JSON.stringify(hist))}catch(e){}bkSoon()};
+// 今日行く店（12時間だけ覚えておく）。autoName は現在地から選んだ店、manualAt は手で選んだ時刻
+const SKEY='shopping-memo-store-v1';
+let todayStore='',autoName='',manualAt=0,RECS=[],addStore='',addCat='';
+try{const o=JSON.parse(localStorage.getItem(SKEY)||'null');if(o&&o.name&&Date.now()-o.ts<12*3600e3){todayStore=o.name;if(o.auto)autoName=o.name}}catch(e){}
+// 定番セットと、うちにある物（期限つき）
+const SETKEY='shopping-memo-sets-v1',STKEY='shopping-memo-stock-v1';
+let sets=[],stock=[];
+try{const a=JSON.parse(localStorage.getItem(SETKEY)||'[]');if(Array.isArray(a))sets=a.filter(s=>s&&s.name&&Array.isArray(s.items))}catch(e){}
+try{const a=JSON.parse(localStorage.getItem(STKEY)||'[]');if(Array.isArray(a))stock=a.filter(s=>s&&s.text)}catch(e){}
+// 定番（毎回「いる／いらない」を選ぶ物）と、買った日の記録（間隔を自動で覚える）
+const REGKEY='shopping-memo-reg-v1',LOGKEY='shopping-memo-log-v1';
+let reg=[],buyLog={},regSel=new Set(),regOther=false,regNewFor='';
+try{const a=JSON.parse(localStorage.getItem(REGKEY)||'[]');if(Array.isArray(a))reg=a.filter(s=>s&&s.text)}catch(e){}
+try{const o=JSON.parse(localStorage.getItem(LOGKEY)||'{}');if(o&&typeof o==='object'&&!Array.isArray(o))buyLog=o}catch(e){}
+const saveX=()=>{try{localStorage.setItem(SETKEY,JSON.stringify(sets));localStorage.setItem(STKEY,JSON.stringify(stock));localStorage.setItem(REGKEY,JSON.stringify(reg))}catch(e){}bkSoon()};
+const saveLog=()=>{try{localStorage.setItem(LOGKEY,JSON.stringify(buyLog))}catch(e){}bkSoon()};
+
+// ---- 最安くらべ（同じサイトの別アプリ）の記録を読む ----
+const PC_KEY='price-compare-v1',DAY=86400000;
+const PC_UNIT={g:{per:100,disp:'100g',kind:'w'},ml:{per:100,disp:'100ml',kind:'v'},'個':{per:1,disp:'1個',kind:'c'}};
+function pcRecs(){
+  try{const a=JSON.parse(localStorage.getItem(PC_KEY)||'[]');return Array.isArray(a)?a.filter(r=>r&&r.item&&r.store&&PC_UNIT[r.unit]&&r.qty>0):[]}catch(e){return []}
+}
+const pcUp=r=>r.price/r.qty*PC_UNIT[r.unit].per;
+// 品名に合う記録を店ごとの最新にして、安い順に並べる。{list:[{store,up,unit,ts}],best}
+function priceInfo(text,recs){
+  const t=text.trim().toLowerCase();if(!t)return null;
+  let name=null;
+  for(const r of recs){const n=r.item.trim().toLowerCase();if(n.length>=2&&t.includes(n)&&(!name||n.length>name.length))name=n}
+  if(!name)return null;
+  const mine=recs.filter(r=>r.item.trim().toLowerCase()===name);
+  const kind=PC_UNIT[mine.reduce((a,b)=>b.ts>a.ts?b:a).unit].kind;
+  const byStore=new Map();
+  for(const r of mine){
+    if(PC_UNIT[r.unit].kind!==kind)continue;
+    const k=r.store.trim().toLowerCase(),o=byStore.get(k);
+    if(!o||r.ts>o.ts)byStore.set(k,r);
+  }
+  const list=[...byStore.values()].map(r=>({store:r.store.trim(),up:pcUp(r),unit:r.unit,ts:r.ts})).sort((a,b)=>a.up-b.up);
+  return {list,best:list[0]};
+}
+const fmt=x=>(Math.round(x.up*10)/10).toLocaleString('ja-JP')+'円/'+PC_UNIT[x.unit].disp;
+function priceHint(text,recs){
+  const i=priceInfo(text,recs);if(!i)return null;
+  const days=Math.floor((Date.now()-i.best.ts)/DAY);
+  return {text:i.best.store+'が最安なのだ '+fmt(i.best),old:days>30?days+'日前':''};
+}
+
+// ---- 店 ----
+const norm=s=>String(s||'').normalize('NFKC').trim().toLowerCase();
+const sameStore=(a,b)=>{a=norm(a);b=norm(b);if(!a||!b)return false;return a===b||(Math.min(a.length,b.length)>=3&&(a.includes(b)||b.includes(a)))};
+function knownStores(){
+  const m=[];
+  const add=(name,ts)=>{name=String(name||'').trim();if(!name)return;const o=m.find(x=>sameStore(x.name,name));if(o){if(ts>o.ts)o.ts=ts}else m.push({name,ts})};
+  for(const r of pcRecs())add(r.store,r.ts);
+  for(const it of items)add(it.store,0);
+  for(const s of reg)add(s.store,0);      // 定番に付けた店も、今日の店のボタンに出す
+  if(todayStore)add(todayStore,0);
+  return m.sort((a,b)=>b.ts-a.ts).map(x=>x.name);
+}
+const hue=s=>{let n=0;for(const ch of norm(s))n=(n*31+ch.charCodeAt(0))%360;return n};
+// 品 it を、今日の店 S で買う物か・どこでもいい物か・他の店で買う物かに分ける
+function place(it,info,S){
+  const own=it.store;
+  const mine=info?info.list.find(x=>sameStore(x.store,S)):null,best=info?info.best:null;
+  if(own){
+    if(!sameStore(own,S))return {b:'other'};
+    if(!best)return {b:'here'};
+    if(!mine)return {b:'here',note:best.store+'が最安なのだ '+fmt(best)+'（ここは未確認）',cls:'w'};
+    if(mine.up<=best.up+1e-9)return {b:'here',note:'最安なのだ '+fmt(mine)};
+    if(mine.up<=best.up*1.05)return {b:'here',note:'ほぼ最安なのだ '+fmt(mine)};
+    return {b:'here',note:best.store+'の方が安いのだ（−'+Math.round((mine.up-best.up)*10)/10+'円/'+PC_UNIT[mine.unit].disp+'）',cls:'w'};
+  }
+  if(!info)return {b:'any'};
+  if(mine){
+    if(mine.up<=best.up+1e-9)return {b:'here',note:'最安なのだ '+fmt(mine)};
+    if(mine.up<=best.up*1.05)return {b:'here',note:'ほぼ最安なのだ '+fmt(mine)};
+    return {b:'other',note:best.store+'が安いのだ（−'+Math.round((mine.up-best.up)*10)/10+'円/'+PC_UNIT[mine.unit].disp+'）',cls:'w'};
+  }
+  return {b:'any',note:best.store+'が最安なのだ '+fmt(best)+'（ここは未確認）',cls:'w'};
+}
+
+// ---- 通知と取り消し ----
+let toastTimer=0;
+function toast(msg,label,fn){
+  hideAsk();
+  $('tmsg').textContent=msg;
+  const b=$('tact');b.hidden=!label;
+  if(label){b.textContent=label;b.onclick=()=>{hideToast();fn&&fn()}}
+  $('toast').classList.add('on');
+  clearTimeout(toastTimer);toastTimer=setTimeout(hideToast,label?6000:2200);
+}
+function hideToast(){$('toast').classList.remove('on')}
+const snap=()=>JSON.parse(JSON.stringify(items));
+const short=s=>s.length>12?s.slice(0,12)+'…':s;
+
+// ---- 追加・変更 ----
+// 追加するときの店：選んであればその店。選んでいなくても、現在地から店を選んでいる間はその店
+const effStore=()=>addStore||(autoName&&todayStore?todayStore:'');
+// 1品を足す。同じ物が入っていれば数を足すか、済みならリストに戻す。戻り値は知らせる文（無ければ ''）
+function putItem(text,qty,store,cat){
+  let msg='';
+  const same=items.find(x=>x.text.toLowerCase()===text.toLowerCase());
+  if(same){
+    if(store)same.store=store;
+    if(cat)same.cat=cat;
+    if(same.done){same.done=false;same.doneTs=0;same.qty=qty;msg='「'+short(text)+'」をリストに戻したのだ'}
+    else{same.qty=Math.min(99,same.qty+qty);msg='「'+short(text)+'」は入っていたので ×'+same.qty+' にしたのだ'}
+  }else{
+    items.push({id:uid(),text,done:false,qty,memo:'',store:store||'',cat:cat||guess(text),ts:Date.now(),doneTs:0});
+  }
+  hist[text]=(hist[text]||0)+1;
+  return msg;
+}
+function addText(raw){
+  const parts=raw.split(/[、,，\n]+/).map(s=>s.trim()).filter(Boolean);
+  let msg='';
+  for(const p of parts){
+    let text=p,qty=1;
+    const m=p.match(/^(.*?)\s*[×xX＊*]\s*(\d{1,2})$/);
+    if(m&&m[1].trim()){text=m[1].trim();qty=+m[2]}
+    msg=putItem(text,qty,effStore(),addCat)||msg;
+  }
+  addCat='';   // 売り場はその1回だけ。店は次も同じ店で足せるように残す
+  save();render();
+  if(msg)toast(msg);
+}
+function addSet(s){
+  let n=0;
+  for(const x of s.items){putItem(x.text,x.qty||1,effStore());n++}
+  save();closeSheet();toast('セット「'+short(s.name)+'」の '+n+' 点を追加したのだ');
+}
+function toggle(it,li){
+  it.done=!it.done;it.doneTs=it.done?Date.now():0;save();
+  if(it.done)logBuy(it.text,it.store||todayStore);else unlogBuy(it.text);
+  li.classList.add('pop');setTimeout(render,it.done?240:120);
+  if(it.done)askPrice(it);else hideAsk();
+}
+function removeItem(it){
+  const before=snap();
+  items=items.filter(x=>x!==it);save();render();
+  toast('「'+short(it.text)+'」を消したのだ','元に戻す',()=>{items=before;save();render()});
+}
+function clearDone(){
+  const before=snap(),n=items.filter(x=>x.done).length;if(!n)return;
+  items=items.filter(x=>!x.done);save();render();
+  toast('済み '+n+' 件を消したのだ','元に戻す',()=>{items=before;save();render()});
+}
+
+// ---- 表示 ----
+let doneOpen=true,suppressClick=false;
+function row(it,recs,note){
+  const li=h('div','row'+(it.done?' done':''));
+  const swbg=h('div','swbg','削除');li.append(swbg);
+  const fr=h('div','front');
+  const chk=h('button','chk','✓');chk.type='button';chk.setAttribute('role','checkbox');chk.setAttribute('aria-checked',String(it.done));chk.setAttribute('aria-label',it.text);
+  chk.onclick=e=>{e.stopPropagation();toggle(it,li)};
+  const body=h('div','body');body.append(h('div','name',it.text));
+  const meta=h('div','meta');
+  if(it.qty>1)meta.append(h('span','q','×'+it.qty));
+  if(it.store&&!(todayStore&&sameStore(it.store,todayStore))){
+    const st=h('span','st',it.store),hu=hue(it.store);
+    st.style.color='hsl('+hu+',55%,38%)';st.style.background='hsla('+hu+',65%,50%,.16)';meta.append(st);
+  }
+  const sk=it.done?null:stockFor(it.text);
+  if(sk)meta.append(h('span','stk','🧊 家にあります'+(sk.exp?'（'+md(sk.exp)+'まで）':'')));
+  const ph=it.done?null:(note!==undefined?note:priceHint(it.text,recs));
+  if(ph){const p=h('span','p'+(ph.cls?' '+ph.cls:''),ph.text);if(ph.old)p.append(h('span','old',' ('+ph.old+')'));meta.append(p)}
+  if(it.memo)meta.append(h('span','m',it.memo));
+  body.append(meta);
+  const more=h('button','more','⋯');more.type='button';more.setAttribute('aria-label',it.text+'を編集');
+  fr.append(chk,body,more);li.append(fr);
+  fr.onclick=()=>{if(!suppressClick)openSheet(it)};
+  // 左にスワイプして削除
+  let sx=0,sy=0,dx=0,sw=false;
+  fr.addEventListener('touchstart',e=>{const t=e.touches[0];sx=t.clientX;sy=t.clientY;dx=0;sw=false},{passive:true});
+  fr.addEventListener('touchmove',e=>{
+    const t=e.touches[0],mx=t.clientX-sx,my=t.clientY-sy;
+    if(!sw){if(Math.abs(mx)>10&&Math.abs(mx)>Math.abs(my)*1.5)sw=true;else return}
+    dx=Math.max(-140,Math.min(0,mx));fr.style.transition='none';fr.style.transform='translateX('+dx+'px)';swbg.style.opacity='1';
+  },{passive:true});
+  fr.addEventListener('touchend',()=>{
+    if(!sw)return;
+    fr.style.transition='';suppressClick=true;setTimeout(()=>{suppressClick=false},80);
+    if(dx<-90){fr.style.transform='translateX(-110%)';setTimeout(()=>removeItem(it),160)}else{fr.style.transform='';setTimeout(()=>{swbg.style.opacity='0'},220)}
+    sw=false;
+  });
+  return li;
+}
+function suggestions(q){
+  const inList=new Set(items.filter(x=>!x.done).map(x=>x.text.toLowerCase()));
+  const pool=new Map(Object.entries(hist));
+  for(const r of pcRecs()){const n=r.item.trim();if(n&&!pool.has(n))pool.set(n,0.5)}
+  let arr=[...pool].filter(([n])=>!inList.has(n.toLowerCase()));
+  q=q.trim().toLowerCase();
+  if(q)arr=arr.filter(([n])=>n.toLowerCase().includes(q)&&n.toLowerCase()!==q);
+  arr.sort((a,b)=>b[1]-a[1]);
+  return arr.slice(0,q?6:12).map(a=>a[0]);
+}
+function renderSug(){
+  const box=$('sug');box.textContent='';
+  const list=suggestions($('t').value);
+  if(!list.length)return;
+  if(!$('t').value.trim())box.append(h('span','lb','よく買う'));
+  for(const n of list){
+    const b=h('button','chip','＋ '+n);b.type='button';
+    b.onclick=()=>{$('t').value='';addText(n)};
+    box.append(b);
+  }
+}
+// ---- 買う間隔を覚えて「そろそろ」を出す ----
+// 同じ日に2回チェックしても1回と数える。3回以上買った物だけ、間隔（中央値）を出す
+// store は買った店（分かれば）。買った回ごとに t と同じ順で ss に残し、よく買う店を「そろそろ」に添える
+function logBuy(name,store){
+  const k=norm(name),o=buyLog[k]||(buyLog[k]={n:name,t:[],s:0}),last=o.t[o.t.length-1];
+  o.n=name;
+  if(!Array.isArray(o.ss))o.ss=[];
+  while(o.ss.length<o.t.length)o.ss.unshift('');
+  if(!last||Date.now()-last>12*3600e3){
+    o.t.push(Date.now());o.ss.push((store||'').trim());
+    if(o.t.length>12){o.t.shift();o.ss.shift()}
+  }
+  saveLog();
+}
+// チェックを外したとき（押し間違い）は、直前の記録を取り消す
+function unlogBuy(name){
+  const o=buyLog[norm(name)];
+  if(o&&o.t.length&&Date.now()-o.t[o.t.length-1]<10*60000){o.t.pop();if(Array.isArray(o.ss))o.ss.pop();saveLog()}
+}
+// よく買う店：2回以上、かつ店が分かっている回の半分以上
+function usualStore(o){
+  const c=new Map();
+  for(const s of (o.ss||[])){if(s){const k=norm(s),e=c.get(k);if(e)e.n++;else c.set(k,{name:s,n:1})}}
+  const top=[...c.values()].sort((a,b)=>b.n-a.n)[0],known=(o.ss||[]).filter(Boolean).length;
+  return top&&top.n>=2&&top.n/known>=0.5?top.name:'';
+}
+function dueList(){
+  const now=Date.now(),inList=new Set(items.filter(x=>!x.done).map(x=>norm(x.text))),out=[];
+  for(const k in buyLog){
+    const o=buyLog[k];
+    if(!o||!Array.isArray(o.t)||o.t.length<3||inList.has(k))continue;
+    const gaps=[];for(let i=1;i<o.t.length;i++)gaps.push((o.t[i]-o.t[i-1])/DAY);
+    gaps.sort((a,b)=>a-b);
+    const med=gaps[Math.floor(gaps.length/2)];
+    if(med<2)continue;                               // ほぼ毎日買う物は対象にしない
+    const since=(now-o.t[o.t.length-1])/DAY;
+    if(since>=med*0.85&&now>(o.s||0))out.push({k,name:o.n,med:Math.round(med),since:Math.floor(since),over:since/med,st:usualStore(o)});
+  }
+  return out.sort((a,b)=>b.over-a.over).slice(0,6);
+}
+function renderDue(){
+  const box=$('due');box.textContent='';
+  const list=dueList();
+  if(!list.length)return;
+  box.append(h('span','lb','そろそろ'));
+  for(const d of list){
+    const c=h('span','dchip'),b=h('button','','＋ '+d.name);b.type='button';
+    b.append(h('small','','約'+d.med+'日ごと・'+d.since+'日前'+(d.st?'・'+d.st:'')));
+    b.onclick=()=>{const m=putItem(d.name,1,d.st||effStore(),'');save();render();if(m)toast(m)};
+    const x=h('button','x','✕');x.type='button';x.setAttribute('aria-label',d.name+'は今回いらない');
+    x.onclick=()=>{buyLog[d.k].s=Date.now()+d.med*DAY;saveLog();render();toast('「'+short(d.name)+'」は、次の間隔まで出さないのだ')};
+    c.append(b,x);box.append(c);
+  }
+}
+// list を売り場ごとにまとめて box に足す。note(it) は行に出す一言（undefined なら最安の表示）
+function catGroups(box,list,note){
+  for(const c of CATS){
+    const g=list.filter(x=>x.cat===c.id).sort((a,b)=>a.ts-b.ts);
+    if(!g.length)continue;
+    const sec=h('div','grp');
+    const hd=h('div','gh');const em=h('span','e',c.ico);em.style.setProperty('--c',c.c);
+    hd.append(em,h('span','',c.name),h('span','n',String(g.length)));
+    const cl=h('div','cardlist');g.forEach(it=>cl.append(row(it,RECS,note(it))));
+    sec.append(hd,cl);box.append(sec);
+  }
+}
+let otherOpen=false;
+function render(){
+  RECS=pcRecs();
+  const recs=RECS,S=todayStore;
+  const pend=items.filter(x=>!x.done),dn=items.filter(x=>x.done).sort((a,b)=>b.doneTs-a.doneTs);
+  const L=$('list');L.textContent='';
+  if(!items.length){
+    const e=h('div','empty');e.append(h('div','big','🛒'),h('div','','買うものはないのだ'));L.append(e);
+  }else if(!S){
+    catGroups(L,pend,()=>undefined);
+  }else{
+    const P=new Map(),bk={here:[],any:[],other:[]};
+    for(const it of pend){const p=place(it,priceInfo(it.text,recs),S);P.set(it,p);bk[p.b].push(it)}
+    const note=it=>{const p=P.get(it);return p&&p.note?{text:p.note,cls:p.cls}:null};
+    const head=(t,n)=>{const d=h('div','bh');d.append(h('span','',t),h('span','n',n+' 点'));return d};
+    if(bk.here.length){L.append(head('🛍 '+S+'で買うのだ',bk.here.length));catGroups(L,bk.here,note)}
+    if(bk.any.length){L.append(head('👀 どこでもいいのだ',bk.any.length));catGroups(L,bk.any,note)}
+    if(!bk.here.length&&!bk.any.length&&pend.length)L.append(h('div','none',S+'で買う物はないのだ'));
+    if(bk.other.length){
+      const b=h('button','bh fold'+(otherOpen?'':' closed'));b.type='button';
+      b.append(h('span','ar','▾'),h('span','','他の店で買うのだ'),h('span','n',bk.other.length+' 点'));
+      b.onclick=()=>{otherOpen=!otherOpen;render()};L.append(b);
+      if(otherOpen)catGroups(L,bk.other,note);
+    }
+  }
+  $('doneSec').hidden=!dn.length;
+  const D=$('done');D.textContent='';
+  if(dn.length&&doneOpen)dn.forEach(it=>D.append(row(it,recs,null)));
+  D.hidden=!doneOpen;
+  $('dh').classList.toggle('closed',!doneOpen);
+  $('dcnt').textContent='カゴに入れたのだ '+dn.length;
+  const total=items.length;
+  $('bar').style.width=(total?dn.length/total*100:0)+'%';
+  renderStores();
+  renderSug();
+  renderBub();
+  renderDue();
+  updateAddBtn();
+}
+
+// ---- 今日の店 ----
+function renderStores(){
+  const box=$('tstore');box.textContent='';
+  const list=knownStores();
+  if(!list.length)return;
+  box.append(h('span','lb','今日の店'));
+  const mk=(label,name)=>{
+    const on=name?norm(todayStore)===norm(name):!todayStore;
+    const b=h('button','chip'+(on?' on':''),label);b.type='button';
+    b.onclick=()=>setStore(on&&name?'':name);box.append(b);
+  };
+  mk('すべて','');
+  list.forEach(n=>mk((autoName&&sameStore(n,autoName)?'📍 ':'')+n,n));
+}
+function setStore(name,auto){
+  todayStore=name;autoName=auto?name:'';if(!auto)manualAt=Date.now();
+  try{if(name)localStorage.setItem(SKEY,JSON.stringify({name,ts:Date.now(),auto:!!auto}));else localStorage.removeItem(SKEY)}catch(e){}
+  render();
+}
+// 近くの店を自動で選ぶ（位置は端末の中だけ。店の座標は最安くらべが記録したもの）
+let lastLoc=0;
+const rad=x=>x*Math.PI/180;
+function dist(a,b){
+  const s=Math.sin(rad(b.lat-a.lat)/2)**2+Math.cos(rad(a.lat))*Math.cos(rad(b.lat))*Math.sin(rad(b.lng-a.lng)/2)**2;
+  return 12742000*Math.asin(Math.sqrt(s));
+}
+function storeLocs(){
+  // 同じ店名でも、記録した場所を全部覚える。事前登録（stores.json）も加える。約10mごとに1つへまとめる
+  const m=new Map();
+  for(const s of (window.ZPRESETS||[]))m.set(s.store+'|'+s.lat.toFixed(4)+'|'+s.lng.toFixed(4),{store:s.store,lat:s.lat,lng:s.lng});
+  for(const r of pcRecs()){
+    if(typeof r.lat!=='number'||typeof r.lng!=='number')continue;
+    const s=r.store.trim(),k=s+'|'+r.lat.toFixed(4)+'|'+r.lng.toFixed(4);
+    if(!m.has(k))m.set(k,{store:s,lat:r.lat,lng:r.lng});
+  }
+  return [...m.values()];
+}
+const zHome=()=>{try{const h=JSON.parse(localStorage.getItem('price-compare-home')||'null');return h&&typeof h.lat==='number'&&typeof h.lng==='number'?h:null}catch(e){return null}};
+async function autoLocate(force){
+  if(!navigator.geolocation)return;
+  if(Date.now()-manualAt<30*60000)return;          // 手で選んだ直後は、位置で上書きしない
+  if(!force&&Date.now()-lastLoc<60000)return;
+  const locs=storeLocs();
+  if(!locs.length)return;                          // 座標のある店が無ければ、位置の許可も求めない
+  lastLoc=Date.now();
+  const p=await new Promise(ok=>navigator.geolocation.getCurrentPosition(
+    q=>ok({lat:q.coords.latitude,lng:q.coords.longitude,acc:q.coords.accuracy}),()=>ok(null),
+    {enableHighAccuracy:false,timeout:8000,maximumAge:60000}));
+  if(!p||p.acc>300)return;
+  const home=zHome();if(home&&dist(p,home)<=50)return;   // 家の近くでは店を動かさない
+  const R=Math.min(150,Math.max(60,p.acc*1.5));       // 位置の誤差に合わせて60〜150m
+  let best=null;
+  for(const s of locs){const d=dist(p,s);if(d<=R&&(!best||d<best.d))best={store:s.store,d}}
+  if(!best){
+    // 選んでいる店から500mより離れたら、選びを外す（店の座標が無ければ判断できないので、そのまま）
+    const sels=todayStore?locs.filter(s=>sameStore(s.store,todayStore)):[];
+    if(sels.length&&Math.min(...sels.map(s=>dist(p,s)))>500){setStore('',true);toast('店から離れたので「すべて」に戻したのだ')}
+    return;
+  }
+  const changed=!sameStore(todayStore,best.store);
+  setStore(best.store,true);
+  if(changed)toast('📍 '+best.store+' にいます');
+}
+
+// ---- 編集シート ----
+let cur=null;
+function openSheet(it){
+  cur=it;hideToast();
+  $('sName').value=it.text;$('sMemo').value=it.memo;$('qn').textContent=it.qty;
+  const box=$('cats');box.textContent='';
+  for(const c of CATS){
+    const b=h('button','chip'+(it.cat===c.id?' on':''),c.ico+' '+c.name);b.type='button';
+    b.onclick=()=>{it.cat=c.id;save();[...box.children].forEach((x,i)=>x.classList.toggle('on',CATS[i].id===c.id))};
+    box.append(b);
+  }
+  $('sStore').value='';renderStoreChips();updateRegBtn();
+  $('ov').classList.add('open');$('sheet').classList.add('open');
+}
+function renderStoreChips(){
+  const box=$('stores');box.textContent='';
+  const info=priceInfo(cur.text,RECS),best=info?info.best.store:'';
+  const mk=(label,val)=>{
+    const on=val?norm(cur.store)===norm(val):!cur.store;
+    const b=h('button','chip'+(on?' on':''),label);b.type='button';
+    b.onclick=()=>{cur.store=on?'':val;$('sStore').value='';save();renderStoreChips()};box.append(b);
+  };
+  mk('おまかせ','');
+  if(best)mk('✨ '+best+'（最安）',best);
+  knownStores().filter(n=>!best||!sameStore(n,best)).forEach(n=>mk(n,n));
+}
+function regHas(text){return reg.find(s=>norm(s.text)===norm(text))}
+function updateRegBtn(){const b=$('sReg'),has=cur&&regHas(cur.text);b.textContent=has?'🔁 定番に入っている（タップで外す）':'🔁 定番に入れる';b.classList.toggle('on',!!has)}
+$('sReg').onclick=()=>{
+  if(!cur)return;
+  const has=regHas(cur.text);
+  if(has)reg=reg.filter(s=>s!==has);else reg.push({id:uid(),text:cur.text,qty:cur.qty,cat:cur.cat,store:cur.store||''});
+  saveX();updateRegBtn();
+};
+$('sStore').oninput=()=>{if(cur){cur.store=$('sStore').value.trim();save()}};
+function closeSheet(){
+  $('ov').classList.remove('open');$('sheet').classList.remove('open');$('sheet2').classList.remove('open');
+  if(document.activeElement&&document.activeElement.blur)document.activeElement.blur();
+  cur=null;render();
+}
+$('sName').oninput=()=>{const v=$('sName').value.trim();if(cur&&v){cur.text=v;save()}};
+$('sMemo').oninput=()=>{if(cur){cur.memo=$('sMemo').value.trim();save()}};
+$('qm').onclick=()=>{if(cur&&cur.qty>1){cur.qty--;$('qn').textContent=cur.qty;save()}};
+$('qp').onclick=()=>{if(cur&&cur.qty<99){cur.qty++;$('qn').textContent=cur.qty;save()}};
+$('sOk').onclick=closeSheet;
+$('ov').onclick=closeSheet;
+$('sDel').onclick=()=>{const it=cur;if(!it)return;$('ov').classList.remove('open');$('sheet').classList.remove('open');cur=null;removeItem(it)};
+
+// ---- 追加するときの売り場・店の選択 ----
+function updateAddBtn(){
+  const b=$('addSt'),s=effStore(),parts=[];
+  if(addCat)parts.push(CAT[addCat].ico+CAT[addCat].name);
+  if(s)parts.push((!addStore?'📍':'')+s);
+  b.textContent=parts.length?parts.join('・'):'🏪 店・売り場';
+  b.classList.toggle('on',parts.length>0);
+}
+function renderPick(){
+  const box=$('addStRow');box.textContent='';
+  const row=label=>{const r=h('div','pkrow');r.append(h('span','lb',label));box.append(r);return r};
+  const r1=row('売り場（この1回だけ）');
+  const mk=(r,label,on,fn)=>{const b=h('button','chip'+(on?' on':''),label);b.type='button';b.onclick=fn;r.append(b)};
+  mk(r1,'おまかせ',!addCat,()=>{addCat='';updateAddBtn();renderPick()});
+  CATS.forEach(c=>mk(r1,c.ico+' '+c.name,addCat===c.id,()=>{addCat=addCat===c.id?'':c.id;updateAddBtn();renderPick()}));
+  const r2=row('店（選ぶと、次に足す物も同じ店）');
+  mk(r2,autoName&&todayStore?'おまかせ（📍'+todayStore+'）':'おまかせ',!addStore,()=>{addStore='';updateAddBtn();renderPick()});
+  knownStores().forEach(n=>mk(r2,n,addStore&&norm(addStore)===norm(n),()=>{addStore=norm(addStore)===norm(n)?'':n;updateAddBtn();renderPick()}));
+  const inp=h('input');inp.placeholder='新しい店を入れる';inp.setAttribute('aria-label','新しい店');
+  const setNew=()=>{const v=inp.value.trim();if(v){addStore=v;updateAddBtn();renderPick()}};
+  inp.onchange=setNew;inp.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();setNew()}};
+  r2.append(inp);
+}
+$('addSt').onclick=()=>{const b=$('addStRow');b.hidden=!b.hidden;if(!b.hidden)renderPick()};
+// 買うものの欄をタップしたら、店・売り場の選択を自動で開く（閉じるのは🏪ボタンか追加したとき）
+const openPick=()=>{const b=$('addStRow');if(b.hidden){b.hidden=false;renderPick()}};
+$('t').addEventListener('focus',openPick);
+$('t').addEventListener('click',openPick);
+
+// ---- 買った値段を、最安くらべの記録に足す ----
+function lastRec(text){
+  const t=text.trim().toLowerCase();let name=null;
+  for(const r of RECS){const n=r.item.trim().toLowerCase();if(n.length>=2&&t.includes(n)&&(!name||n.length>name.length))name=n}
+  if(!name)return null;
+  return RECS.filter(r=>r.item.trim().toLowerCase()===name).reduce((a,b)=>b.ts>a.ts?b:a);
+}
+let askTimer=0,askCtx=null;
+function askPrice(it){
+  const r=lastRec(it.text),store=(it.store||todayStore||'').trim();
+  if(!r||!store)return;                      // 前の記録（量・単位）か、買う店が分からない品は聞かない
+  const canon=knownStores().find(n=>sameStore(n,store))||store;
+  askCtx={r,store:canon};
+  $('askMsg').textContent=canon+'で '+it.text+' '+r.qty+r.unit+' いくら？';
+  $('askIn').value='';
+  hideToast();$('ask').classList.add('on');
+  clearTimeout(askTimer);askTimer=setTimeout(()=>{if(document.activeElement!==$('askIn'))hideAsk()},12000);
+}
+function hideAsk(){$('ask').classList.remove('on');askCtx=null;if(document.activeElement===$('askIn'))$('askIn').blur()}
+function submitAsk(){
+  const v=Math.round(Number($('askIn').value));
+  if(!askCtx||!(v>0))return;
+  const r=askCtx.r,store=askCtx.store;
+  let a=[];try{a=JSON.parse(localStorage.getItem(PC_KEY)||'[]');if(!Array.isArray(a))a=[]}catch(e){}
+  a.push({id:uid(),item:r.item,store,price:v,qty:r.qty,unit:r.unit,photo:null,ts:Date.now()});
+  try{localStorage.setItem(PC_KEY,JSON.stringify(a))}catch(e){toast('記録できませんでした');return}
+  hideAsk();render();toast('最安くらべに記録したのだ（'+v.toLocaleString('ja-JP')+'円）');
+}
+$('askOk').onclick=submitAsk;
+$('askX').onclick=hideAsk;
+$('askIn').onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();submitAsk()}};
+
+// ---- 定番セットと、うちにある物 ----
+const dayNum=exp=>{const t=new Date();t.setHours(0,0,0,0);return Math.round((new Date(exp+'T00:00:00')-t)/DAY)};
+const dlabel=n=>n<0?'期限切れ':n===0?'今日まで':n===1?'明日まで':'あと'+n+'日';
+const md=exp=>{const p=exp.split('-');return Number(p[1])+'/'+Number(p[2])};
+function stockFor(text){
+  const t=norm(text);
+  return stock.find(s=>{
+    const n=norm(s.text);
+    if(!n||(s.exp&&dayNum(s.exp)<0))return false;
+    return n===t||(Math.min(n.length,t.length)>=2&&(t.includes(n)||n.includes(t)));
+  });
+}
+// ずんだもんの一言。期限が近い物があれば、それを先に知らせる（タップでうちにある物を開く）。ぜんぶ買えたときは、お祝いの全身に替わる
+let bubNear=false;
+function renderBub(){
+  const total=items.length,pend=items.filter(x=>!x.done).length;
+  const near=stock.filter(s=>s.exp&&dayNum(s.exp)<=1).sort((a,b)=>a.exp<b.exp?-1:1);
+  bubNear=near.length>0;
+  const celebrate=total>0&&pend===0&&!near.length;
+  $('fin').hidden=!celebrate;$('bub').hidden=celebrate;
+  if(celebrate){$('finTxt').textContent=total+'つ買ったのだ';return}
+  const say=$('say');say.textContent='';
+  const add=(...ps)=>ps.forEach(p=>{if(p==='\n')say.append(document.createElement('br'));else if(Array.isArray(p))say.append(h('b','',p[0]));else say.append(p)});
+  $('av').classList.toggle('w',bubNear);
+  if(near.length){
+    const n=dayNum(near[0].exp);
+    add(near[0].text+'が',[n<0?'きのうまで':n===0?'きょうまで':'あしたまで'],'なのだ！','\n','先に使うのだ！'+(near.length>1?'（ほか'+(near.length-1)+'つ）':''));
+  }else if(!total)add('なにを買うのだ？');
+  else if(todayStore)add('きょうは',[todayStore],'なのだ！','\n','あと ',[pend+'つ'],' 買うのだ！（'+(total-pend)+'/'+total+'）');
+  else add('あと ',[pend+'つ'],' 買うのだ！（'+(total-pend)+'/'+total+'）');
+}
+$('bub').onclick=()=>{if(bubNear)openPanel('stock')};
+let mode='sets';
+function openPanel(m){
+  mode=m;regNewFor='';hideToast();hideAsk();if(m==='reg')selectAllReg();renderPanel();
+  $('ov').classList.add('open');$('sheet2').classList.add('open');
+}
+function renderPanel(){
+  $('m1').classList.toggle('on',mode==='sets');$('m2').classList.toggle('on',mode==='stock');$('m3').classList.toggle('on',mode==='reg');
+  const box=$('p2');box.textContent='';
+  if(mode==='sets'){
+    if(!sets.length)box.append(h('div','none','セットはまだありません'));
+    sets.forEach(s=>{
+      const r=h('div','srow'),nm=h('div','sname');
+      nm.append(h('b','',s.name),h('span','sub',s.items.length+' 点：'+s.items.map(x=>x.text).join('、')));
+      const add=h('button','sadd','追加');add.type='button';add.onclick=()=>addSet(s);
+      const del=h('button','sdel','✕');del.type='button';del.setAttribute('aria-label',s.name+'を削除');
+      del.onclick=()=>{const before=JSON.parse(JSON.stringify(sets));sets=sets.filter(x=>x!==s);saveX();renderPanel();toast('セット「'+short(s.name)+'」を削除','元に戻す',()=>{sets=before;saveX();if($('sheet2').classList.contains('open'))renderPanel()})};
+      r.append(nm,add,del);box.append(r);
+    });
+    const f=h('div','sform'),inp=h('input','fld');inp.placeholder='セット名（例：毎週の買い物）';inp.setAttribute('aria-label','セット名');
+    const sv=h('button','sadd','今のリストを保存');sv.type='button';
+    sv.onclick=()=>{
+      const name=inp.value.trim();
+      if(!items.length){toast('リストが空です');return}
+      if(!name){toast('セット名を入れてください');return}
+      sets.push({id:uid(),name,items:items.map(x=>({text:x.text,qty:x.qty}))});saveX();renderPanel();toast('セット「'+short(name)+'」を保存しました');
+    };
+    f.append(inp,sv);box.append(f);
+  }else if(mode==='reg'){
+    const inList=new Set(items.filter(x=>!x.done).map(x=>norm(x.text)));
+    const S=todayStore,so=s=>(s.store||'').trim(),stores=knownStores();
+    const mkRow=s=>{
+      const have=inList.has(norm(s.text)),on=regSel.has(s.id)&&!have;
+      const r=h('div','srow'+(have?' have':'')),ck=h('button','chk'+(on?' on':''),'✓');ck.type='button';
+      ck.setAttribute('role','checkbox');ck.setAttribute('aria-checked',String(on));ck.setAttribute('aria-label',s.text);ck.disabled=have;
+      ck.onclick=()=>{if(regSel.has(s.id))regSel.delete(s.id);else regSel.add(s.id);renderPanel()};
+      const nm=h('div','sname');nm.append(h('b','',s.text+(s.qty>1?' ×'+s.qty:'')),have?h('span','sub g','もうリストに入っているのだ'):h('span','sub',CAT[s.cat]?CAT[s.cat].name:''));
+      const sel=h('select','sel');sel.setAttribute('aria-label',s.text+'の店');
+      const opts=['',...stores];if(so(s)&&!opts.some(o=>norm(o)===norm(so(s))))opts.push(so(s));
+      opts.forEach(o=>{const op=h('option','',o||'どこでも');op.value=o;if(norm(o)===norm(so(s)))op.selected=true;sel.append(op)});
+      const opN=h('option','','＋ 新しい店…');opN.value='__new';sel.append(opN);
+      sel.onchange=()=>{if(sel.value==='__new'){regNewFor=s.id;renderPanel();return}s.store=sel.value;saveX();renderPanel()};
+      const del=h('button','sdel','✕');del.type='button';del.setAttribute('aria-label',s.text+'を定番から外す');
+      del.onclick=()=>{const before=JSON.parse(JSON.stringify(reg));reg=reg.filter(x=>x!==s);saveX();renderPanel();toast('「'+short(s.text)+'」を定番から外したのだ','元に戻す',()=>{reg=before;saveX();if($('sheet2').classList.contains('open'))renderPanel()})};
+      r.append(ck,nm,sel,del);
+      const wrap=h('div');wrap.append(r);
+      if(regNewFor===s.id){
+        const nf=h('div','sform'),ni=h('input','fld');ni.placeholder='新しい店の名前';ni.setAttribute('aria-label','新しい店の名前');
+        const ok=h('button','sadd','きめる');ok.type='button';
+        const go2=()=>{const v=ni.value.trim();if(!v)return;s.store=v;regNewFor='';saveX();renderPanel()};
+        ok.onclick=go2;ni.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();go2()}};
+        const cn=h('button','sdel','✕');cn.type='button';cn.setAttribute('aria-label','やめる');cn.onclick=()=>{regNewFor='';renderPanel()};
+        nf.append(ni,ok,cn);nf.style.marginTop='0';wrap.append(nf);
+      }
+      return wrap;
+    };
+    // 店ごとの見出しにまとめる。今日の店が決まっていれば、その店と「どこでも」を上に、他の店は折りたたむ
+    const groups=[];
+    if(!reg.length)box.append(h('div','none','定番はまだないのだ'));
+    if(S){
+      groups.push({t:S+'（今日の店）',l:reg.filter(s=>so(s)&&sameStore(so(s),S))});
+      groups.push({t:'どこでも',l:reg.filter(s=>!so(s))});
+      groups.push({t:'他の店',l:reg.filter(s=>so(s)&&!sameStore(so(s),S)),fold:true});
+    }else{
+      const seen=[];
+      for(const s of reg){const k=so(s);if(k&&!seen.some(x=>norm(x)===norm(k)))seen.push(k)}
+      seen.forEach(k=>groups.push({t:k,l:reg.filter(s=>norm(so(s))===norm(k))}));
+      groups.push({t:'どこでも',l:reg.filter(s=>!so(s))});
+    }
+    groups.forEach(g=>{
+      if(!g.l.length)return;
+      if(g.fold){
+        const bt=h('button','gl'+(regOther?'':' closed'));bt.type='button';
+        bt.append(h('span','ar','▾'),h('span','',g.t),h('span','n',g.l.length+' 点'));
+        bt.onclick=()=>{regOther=!regOther;renderPanel()};box.append(bt);
+        if(!regOther)return;
+      }else{const gl=h('div','gl');gl.append(h('span','',g.t),h('span','n',g.l.length+' 点'));box.append(gl)}
+      g.l.forEach(s=>box.append(mkRow(s)));
+    });
+    const n=reg.filter(s=>regSel.has(s.id)&&!inList.has(norm(s.text))).length;
+    const go=h('button','wide','選んだ '+n+' 点をリストに足すのだ');go.type='button';go.disabled=!n;
+    go.onclick=()=>{
+      let c=0;
+      for(const s of reg){if(regSel.has(s.id)&&!inList.has(norm(s.text))){putItem(s.text,s.qty||1,so(s)||effStore(),s.cat);c++}}
+      save();closeSheet();toast('定番から '+c+' 点を足したのだ');
+    };
+    box.append(go);
+    const f=h('div','sform'),inp=h('input','fld'),sSel=h('select','fld'),sNew=h('input','fld');
+    inp.placeholder='定番に入れる物（例：トイレットペーパー）';inp.setAttribute('aria-label','定番に入れる物');
+    sSel.setAttribute('aria-label','買う店');
+    const so0=h('option','','どこでも');so0.value='';sSel.append(so0);
+    stores.forEach(n=>{const o=h('option','',n);o.value=n;if(S&&norm(n)===norm(S))o.selected=true;sSel.append(o)});
+    const soN=h('option','','＋ 新しい店…');soN.value='__new';sSel.append(soN);
+    sNew.placeholder='新しい店の名前';sNew.setAttribute('aria-label','新しい店の名前');sNew.hidden=true;
+    sSel.onchange=()=>{sNew.hidden=sSel.value!=='__new'};
+    const ad=h('button','sadd','追加');ad.type='button';
+    const add=()=>{
+      const v=inp.value.trim();if(!v)return;
+      const st=sSel.value==='__new'?sNew.value.trim():sSel.value;
+      const id=uid();reg.push({id,text:v,qty:1,cat:guess(v),store:st});regSel.add(id);saveX();renderPanel();
+    };
+    ad.onclick=add;inp.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();add()}};
+    f.append(inp,sSel,sNew,ad);box.append(f);
+  }else{
+    const list=[...stock].sort((a,b)=>(a.exp||'9999-99-99')<(b.exp||'9999-99-99')?-1:1);
+    if(!list.length)box.append(h('div','none','登録した物はありません'));
+    list.forEach(s=>{
+      const r=h('div','srow'),nm=h('div','sname');
+      const sub=h('span','sub');
+      if(s.exp){const n=dayNum(s.exp);sub.textContent=md(s.exp)+'まで（'+dlabel(n)+'）';if(n<0)sub.className='sub late';else if(n<=3)sub.className='sub soon'}
+      else sub.textContent='期限なし';
+      nm.append(h('b','',s.text),sub);
+      const del=h('button','sdel','✕');del.type='button';del.setAttribute('aria-label',s.text+'を削除');
+      del.onclick=()=>{const before=JSON.parse(JSON.stringify(stock));stock=stock.filter(x=>x!==s);saveX();renderPanel();render();toast('「'+short(s.text)+'」を削除','元に戻す',()=>{stock=before;saveX();render();if($('sheet2').classList.contains('open'))renderPanel()})};
+      r.append(nm,del);box.append(r);
+    });
+    const f=h('div','sform'),nmI=h('input','fld'),dI=h('input','fld');
+    nmI.placeholder='物の名前（例：牛乳）';nmI.setAttribute('aria-label','物の名前');
+    dI.type='date';dI.setAttribute('aria-label','期限');
+    const ad=h('button','sadd','追加');ad.type='button';
+    const go=()=>{const v=nmI.value.trim();if(!v)return;stock.push({id:uid(),text:v,exp:dI.value||''});saveX();renderPanel();render()};
+    ad.onclick=go;nmI.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();go()}};
+    f.append(nmI,dI,ad);box.append(f);
+  }
+}
+$('bSets').onclick=()=>openPanel('sets');
+$('bReg').onclick=()=>openPanel('reg');
+$('bStock').onclick=()=>openPanel('stock');
+$('m1').onclick=()=>{mode='sets';renderPanel()};
+$('m2').onclick=()=>{mode='stock';renderPanel()};
+$('m3').onclick=()=>{mode='reg';selectAllReg();renderPanel()};
+// 定番は、はじめは全部「いる」にしておく。リストに入っていない物だけ
+function selectAllReg(){const S=todayStore;regSel=new Set(reg.filter(s=>!S||!(s.store||'').trim()||sameStore(s.store,S)).map(s=>s.id))}
+$('s2Ok').onclick=closeSheet;
+
+// ---- 入力・共有・そのほか ----
+$('f').onsubmit=e=>{e.preventDefault();const v=$('t').value.trim();if(!v)return;$('t').value='';$('addStRow').hidden=true;addText(v)};
+$('t').oninput=renderSug;
+$('clr').onclick=clearDone;
+$('dtg').onclick=()=>{doneOpen=!doneOpen;render()};
+$('share').onclick=async()=>{
+  const pend=items.filter(x=>!x.done);
+  if(!pend.length){toast('残りの買い物はないのだ');return}
+  let s='🛒 買い物リスト\n';
+  for(const c of CATS){
+    const g=pend.filter(x=>x.cat===c.id);if(!g.length)continue;
+    s+='\n【'+c.name+'】\n'+g.map(x=>'・'+x.text+(x.qty>1?' ×'+x.qty:'')+(x.store?' @'+x.store:'')+(x.memo?'（'+x.memo+'）':'')).join('\n')+'\n';
+  }
+  try{
+    if(navigator.share){await navigator.share({text:s})}
+    else{await navigator.clipboard.writeText(s);toast('リストをコピーしました')}
+  }catch(e){if(e&&e.name!=='AbortError')toast('共有できませんでした')}
+};
+// 最安くらべで記録して戻ってきたときに読み直す
+addEventListener('pageshow',()=>{if(window.ZAPP!=='m')return;render();autoLocate()});
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&window.ZAPP==='m'){render();autoLocate()}});
+addEventListener('storage',e=>{if(e.key===PC_KEY)render()});
+save();render();if(window.ZAPP==='m')autoLocate(true);
+
+function bkCollect(){return {items,hist,sets,stock,reg,buyLog}}
+function bkEmpty(){return !items.length&&!reg.length&&!sets.length&&!stock.length&&!Object.keys(hist).length&&!Object.keys(buyLog).length}
+// 足りない分だけ加える（今の内容は消さない）
+function bkApply(d){
+  let n=0;
+  const uni=(mine,theirs,norm)=>{for(const x of (theirs||[])){if(x&&x.id&&!mine.some(y=>y.id===x.id)){mine.push(norm?norm(x):x);n++}}};
+  uni(items,d.items,x=>({id:x.id,text:String(x.text||''),done:!!x.done,qty:x.qty>0?x.qty:1,memo:x.memo||'',store:x.store||'',cat:CAT[x.cat]?x.cat:guess(String(x.text||'')),ts:x.ts||Date.now(),doneTs:x.doneTs||0}));
+  items=items.filter(x=>x.text);
+  uni(sets,d.sets);uni(stock,d.stock);uni(reg,d.reg);
+  for(const k in (d.hist||{})){if(!(hist[k]>=d.hist[k])){hist[k]=d.hist[k];n++}}
+  for(const k in (d.buyLog||{})){const a=buyLog[k],b=d.buyLog[k];if(b&&Array.isArray(b.t)&&(!a||a.t.length<b.t.length)){buyLog[k]=b;n++}}
+  save();saveX();saveLog();render();
+  return n+'件';
+}
+
+// ---- バックアップ（GitHub の非公開リポジトリ backup-data）----
+// トークン（Fine-grained・このリポジトリの Contents だけ）は端末にだけ置く。2つのアプリで共有。写真は含めない
+const BK={owner:'ageargfbv',repo:'backup-data',tokKey:'backup-gh-token',file:'shopping-memo.json',lastKey:'backup-last-shopping-memo'};
+const bkTok=()=>{try{return localStorage.getItem(BK.tokKey)||''}catch(e){return ''}};
+const bkGet=k=>{try{return localStorage.getItem(k)||''}catch(e){return ''}};
+const bkSet=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+const b64=s=>{const b=new TextEncoder().encode(s);let x='';for(let i=0;i<b.length;i+=0x8000)x+=String.fromCharCode.apply(null,b.subarray(i,i+0x8000));return btoa(x)};
+const unb64=s=>{const x=atob(s.replace(/\s/g,'')),b=new Uint8Array(x.length);for(let i=0;i<x.length;i++)b[i]=x.charCodeAt(i);return new TextDecoder().decode(b)};
+const bkHash=s=>{let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0).toString(36)+':'+s.length};
+const bkApi=(method,path,body)=>fetch('https://api.github.com/repos/'+BK.owner+'/'+BK.repo+path,{method,
+  headers:{'Authorization':'Bearer '+bkTok(),'Accept':'application/vnd.github+json','Content-Type':'application/json'},
+  body:body?JSON.stringify(body):undefined});
+const bkErr=e=>{const s=e&&e.status;return s===401||s===403?'トークンを確認してください（'+s+'）':s===404?'トークンの対象に backup-data が入っていません（404）':s?'保存できませんでした（'+s+'）':'通信できませんでした'};
+async function bkRemote(){
+  const r=await bkApi('GET','/contents/'+BK.file+'?t='+Date.now());
+  if(r.status===404)return null;
+  if(!r.ok){const e=new Error('http');e.status=r.status;throw e}
+  const j=await r.json();
+  return {sha:j.sha,payload:JSON.parse(unb64(j.content))};
+}
+function bkStatus(msg){
+  const el=document.getElementById('bkSt');if(!el)return;
+  if(msg){el.textContent='☁ '+msg;return}
+  const at=+bkGet(BK.lastKey+'-at');
+  el.textContent=!bkTok()?'☁ バックアップ：未設定':at?'☁ 最後の保存 '+new Date(at).toLocaleString('ja-JP',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}):'☁ つながっています（まだ保存していません）';
+}
+let bkBusy=false,bkTimer=0,bkDirty=false;
+// データが変わったら、少し待ってから自動で送る（続けて変えたときは最後の1回だけ）
+function bkSoon(){try{if(!bkTok())return;bkDirty=true;clearTimeout(bkTimer);bkTimer=setTimeout(()=>bkPush(),8000)}catch(e){}}   // 起動直前（下の定義より前）に呼ばれても落ちない
+async function bkPush(force){
+  if(!bkTok()||bkBusy)return;
+  clearTimeout(bkTimer);bkDirty=false;
+  const data=bkCollect(),body=JSON.stringify(data),hash=bkHash(body);
+  if(!force&&bkGet(BK.lastKey)===hash)return;
+  bkBusy=true;bkStatus('保存中…');
+  try{
+    const rem=await bkRemote();
+    const put=sha=>bkApi('PUT','/contents/'+BK.file,{message:'バックアップ '+new Date().toLocaleString('ja-JP'),
+      content:b64(JSON.stringify({app:'shopping-memo',savedAt:Date.now(),data})),...(sha?{sha}:{})});
+    let r=await put(rem&&rem.sha);
+    if(r.status===409||r.status===422){const rem2=await bkRemote();r=await put(rem2&&rem2.sha)}
+    if(!r.ok){const e=new Error('http');e.status=r.status;throw e}
+    bkSet(BK.lastKey,hash);bkSet(BK.lastKey+'-at',String(Date.now()));bkStatus();
+  }catch(e){bkStatus(bkErr(e));bkDirty=true}
+  finally{bkBusy=false}
+}
+async function bkRestore(auto){
+  if(!bkTok()){bkStatus('先に「設定」でトークンを入れてください');return}
+  try{
+    const rem=await bkRemote();
+    if(!rem){bkStatus('保存がまだありません');return}
+    const when=new Date(rem.payload.savedAt).toLocaleString('ja-JP');
+    if(!confirm('GitHubの保存（'+when+'）を取り込みますか？\n今の内容は消えず、足りない分が加わります。')){if(auto)bkSet('backup-declined-shopping-memo',String(Date.now()));return}
+    const n=bkApply(rem.payload.data||{});
+    bkSet(BK.lastKey,'');bkStatus('取り込みました（'+n+'）');
+  }catch(e){bkStatus(bkErr(e))}
+}
+async function bkSetup(){
+  const SET='（設定済み）';
+  const v=prompt('GitHubのトークン（空にすると削除）',bkTok()?SET:'');
+  if(v===null)return;
+  const t=v.trim();if(t===SET)return;
+  if(!t){try{localStorage.removeItem(BK.tokKey)}catch(e){}bkStatus();return}
+  bkSet(BK.tokKey,t);bkStatus('確認中…');
+  try{
+    const r=await bkApi('GET','');
+    if(!r.ok){const e=new Error('http');e.status=r.status;throw e}
+    bkStatus('つながりました');
+    if(bkEmpty())await bkRestore(false);else await bkPush(true);
+  }catch(e){bkStatus(bkErr(e))}
+}
+document.getElementById('bkSet').onclick=bkSetup;
+document.getElementById('bkNow').onclick=()=>bkPush(true);
+document.getElementById('bkRestore').onclick=()=>bkRestore(false);
+// アプリを離れるとき、送っていない変更があれば送る
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&bkDirty)bkPush()});
+bkStatus();
+// データが空なのに保存がある（消えたあと）ときは、取り込みを勧める。断ったら1日は聞かない
+if(bkTok()&&bkEmpty()&&Date.now()-(+bkGet('backup-declined-shopping-memo')||0)>864e5)bkRestore(true);
+window.ZMEMO={show(){render();autoLocate(true)}};
+
+})();
+</script>
+<script>
+(()=>{
+
+const TAX=1.08; // 食品の軽減税率
+const KEY='price-compare-v1', DAY=86400000;
+const UNIT={g:{per:100,disp:'100g',kind:'w'},ml:{per:100,disp:'100ml',kind:'v'},'個':{per:1,disp:'1個',kind:'c'}};
+let recs=[];
+try{recs=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){}
+const persist=()=>{try{localStorage.setItem(KEY,JSON.stringify(recs))}catch(e){alert('保存できませんでした')}bkSoon()};
+const $=id=>document.getElementById(id);
+const yen=n=>(Math.round(n*10)/10).toLocaleString('ja-JP');
+
+// ---- 写真（IndexedDB） ----
+let dbp;
+function idb(){return dbp||(dbp=new Promise((ok,ng)=>{const r=indexedDB.open('price-compare',1);r.onupgradeneeded=()=>r.result.createObjectStore('photos');r.onsuccess=()=>ok(r.result);r.onerror=()=>ng(r.error)}))}
+async function tx(mode,fn){const db=await idb();return new Promise((ok,ng)=>{const t=db.transaction('photos',mode);const rq=fn(t.objectStore('photos'));t.oncomplete=()=>ok(rq&&rq.result);t.onerror=()=>ng(t.error)})}
+const putPhoto=(id,b)=>tx('readwrite',s=>s.put(b,id));
+const getPhoto=id=>tx('readonly',s=>s.get(id));
+const delPhoto=id=>tx('readwrite',s=>s.delete(id));
+function shrink(file,max=1280){return new Promise((ok,ng)=>{
+  const u=URL.createObjectURL(file),im=new Image();
+  im.onload=()=>{const k=Math.min(1,max/Math.max(im.width,im.height));const c=document.createElement('canvas');c.width=Math.round(im.width*k);c.height=Math.round(im.height*k);c.getContext('2d').drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);c.toBlob(b=>b?ok(b):ng(new Error('blob')),'image/jpeg',.8)};
+  im.onerror=()=>{URL.revokeObjectURL(u);ng(new Error('img'))};im.src=u})}
+
+// ---- 単価計算 ----
+function norm(price,tax,qty,unit){
+  let q=+qty,u=unit;
+  if(u==='kg'){q*=1000;u='g'}else if(u==='L'){q*=1000;u='ml'}
+  const p=Math.round(tax==='ex'?price*TAX:price);
+  return {price:p,qty:q,unit:u};
+}
+const unitPrice=r=>r.price/r.qty*UNIT[r.unit].per;
+const sameItem=(a,b)=>a.trim().toLowerCase()===b.trim().toLowerCase();
+function latestByStore(item,kind){
+  const m=new Map();
+  for(const r of recs){
+    if(!sameItem(r.item,item)||UNIT[r.unit].kind!==kind)continue;
+    const k=r.store.trim().toLowerCase(),o=m.get(k);
+    if(!o||r.ts>o.ts)m.set(k,r);
+  }
+  return [...m.values()].sort((a,b)=>unitPrice(a)-unitPrice(b));
+}
+const ago=ts=>{const d=Math.floor((Date.now()-ts)/DAY);return d<=0?'今日':d+'日前'};
+
+// ---- 判定 ----
+function current(){
+  const price=parseFloat($('price').value),qty=parseFloat($('qty').value);
+  if(!(price>0)||!(qty>0))return null;
+  return norm(price,$('tax').value,qty,$('unit').value);
+}
+// 店の公式アプリ／サイトへのリンク（ユニクロはユニバーサルリンク＝アプリ入りならアプリで開く。DAISOはApp Store）
+const APPS=[
+  {re:/daiso|ダイソー/i,label:'DAISOアプリで在庫を見る',url:()=>'https://apps.apple.com/jp/app/id6466987025'},
+  {re:/uniqlo|ユニクロ/i,label:'ユニクロで探す',url:item=>'https://www.uniqlo.com/jp/ja/search?q='+encodeURIComponent(item)},
+  {re:/muji|無印/i,label:'MUJIアプリで在庫を見る',url:()=>'https://apps.apple.com/jp/app/muji-passport/id631993791'}
+];
+function updateAppLink(){
+  const a=$('appLink'),st=$('store').value,it=$('item').value.trim();
+  const m=APPS.find(x=>x.re.test(st));
+  if(!m){a.style.display='none';return}
+  a.href=m.url(it);a.textContent=m.label+' ↗';a.style.display='inline-block';
+}
+function updateVerdict(){
+  updateAppLink();
+  const v=$('verdict'),big=v.querySelector('.big');
+  v.className='';v.querySelectorAll('.sm').forEach(e=>e.remove());
+  const add=t=>{const d=document.createElement('div');d.className='sm';d.textContent=t;v.querySelector('.tx').append(d)};
+  const item=$('item').value.trim(),c=current();
+  if(!c){big.textContent='—';return}
+  const up=unitPrice(c),disp=UNIT[c.unit].disp;
+  big.textContent=yen(up)+'円 / '+disp;
+  if(!item)return;
+  const list=latestByStore(item,UNIT[c.unit].kind);
+  if(!list.length){add('まだ比べる記録がないのだ');return}
+  const best=list[0],bu=unitPrice(best),diff=up-bu,pct=diff/bu*100;
+  const stale=Date.now()-best.ts>30*DAY?'（'+ago(best.ts)+'の価格）':'';
+  if(diff<-0.05){
+    v.className='good';big.textContent='最安なのだ！　'+yen(up)+'円 / '+disp;
+    add('これまでの最安 '+best.store+' '+yen(bu)+'円 / '+disp+stale+' より '+yen(-diff)+'円安い');
+  }else if(pct<=5){
+    v.className='warn';big.textContent='ほぼ最安なのだ　'+yen(up)+'円 / '+disp;
+    add('最安 '+best.store+' '+yen(bu)+'円 / '+disp+stale+'（差 '+yen(diff)+'円）');
+  }else{
+    v.className='bad';big.textContent='高いのだ…　'+yen(up)+'円 / '+disp;
+    const pack=diff*c.qty/UNIT[c.unit].per;
+    add(best.store+' の '+yen(bu)+'円 / '+disp+stale+' より '+yen(diff)+'円高い（+'+Math.round(pct)+'%）');
+    add('このパックだと約 '+yen(pack)+'円 損なのだ');
+  }
+}
+
+// ---- 一覧 ----
+const urls=new Map();
+async function thumb(id){
+  if(!id)return null;
+  if(urls.has(id))return urls.get(id);
+  try{const b=await getPhoto(id);if(!b)return null;const u=URL.createObjectURL(b);urls.set(id,u);return u}catch(e){return null}
+}
+function openViewer(u){const v=$('viewer');v.querySelector('img').src=u;v.style.display='flex'}
+$('viewer').onclick=()=>{$('viewer').style.display='none'};
+
+async function renderList(){
+  const box=$('p_list');box.textContent='';
+  if(!recs.length){const e=document.createElement('div');e.className='empty';e.textContent='まだ記録がないのだ';box.append(e);return}
+  const names=[...new Map(recs.map(r=>[r.item.trim().toLowerCase(),r.item.trim()])).values()].sort((a,b)=>a.localeCompare(b,'ja'));
+  for(const name of names){
+    const card=document.createElement('div');card.className='card item';
+    const h=document.createElement('h2');h.textContent=name;card.append(h);
+    for(const kind of ['w','v','c']){
+      const list=latestByStore(name,kind);
+      for(let i=0;i<list.length;i++){
+        const r=list[i],row=document.createElement('div');row.className='rank'+(i===0?' best':'');
+        const u=await thumb(r.photo);
+        if(u){const im=document.createElement('img');im.src=u;im.alt='';im.onclick=()=>openViewer(u);row.append(im)}else{const p=document.createElement('div');p.className='ph';row.append(p)}
+        const st=document.createElement('div');st.className='st';
+        st.append(document.createTextNode((i===0?'★ ':'')+r.store));
+        const sm=document.createElement('small');
+        const old=Date.now()-r.ts>30*DAY;
+        sm.textContent=yen(r.price)+'円 / '+yen(r.qty)+(r.unit==='個'?'個':r.unit)+' ・ '+ago(r.ts);
+        if(old)sm.className='old';
+        st.append(sm);
+        const up=document.createElement('div');up.className='up';up.textContent=yen(unitPrice(r))+'円/'+UNIT[r.unit].disp;
+        row.append(st,up);card.append(row);
+      }
+    }
+    const det=document.createElement('details');const sum=document.createElement('summary');sum.textContent='履歴';det.append(sum);
+    const all=recs.filter(r=>sameItem(r.item,name)).sort((a,b)=>b.ts-a.ts);
+    for(const r of all){
+      const h2=document.createElement('div');h2.className='hist';
+      const s=document.createElement('span');s.textContent=new Date(r.ts).toLocaleDateString('ja-JP')+' '+r.store+' '+yen(r.price)+'円/'+yen(r.qty)+(r.unit==='個'?'個':r.unit);
+      const d=document.createElement('button');d.textContent='✕';d.setAttribute('aria-label','削除');
+      d.onclick=async()=>{
+        if(!confirm('この記録を削除しますか？\n'+s.textContent))return;
+        recs=recs.filter(x=>x.id!==r.id);persist();
+        if(r.photo){urls.delete(r.photo);try{await delPhoto(r.photo)}catch(e){}}
+        renderList();fillLists();updateVerdict();
+      };
+      h2.append(s,d);det.append(h2);
+    }
+    card.append(det);box.append(card);
+  }
+}
+
+function fillLists(){
+  const fill=(id,vals)=>{const dl=$(id);dl.textContent='';[...new Set(vals)].forEach(v=>{const o=document.createElement('option');o.value=v;dl.append(o)})};
+  fill('items',recs.map(r=>r.item.trim()));
+  fill('p_stores',[...recs.map(r=>r.store.trim()),...presetList().map(s=>s.store)]);
+}
+
+// ---- 入力 ----
+// ---- 写真から読み取り（Gemini・無料枠。キーはこの端末にだけ置く） ----
+const GKEY='price-compare-gemini-key';
+const getKey=()=>{try{return localStorage.getItem(GKEY)||''}catch(e){return ''}};
+const UNITS_OK=['g','kg','ml','L','個'];
+const SCHEMA={type:'OBJECT',properties:{
+  item:{type:'STRING',nullable:true},
+  price:{type:'NUMBER',nullable:true},
+  price_includes_tax:{type:'BOOLEAN',nullable:true},
+  quantity:{type:'NUMBER',nullable:true},
+  unit:{type:'STRING',nullable:true,enum:UNITS_OK},
+  store:{type:'STRING',nullable:true}}};
+function promptText(){
+  const names=[...new Set(recs.map(r=>r.item.trim()))].slice(0,50);
+  return '日本のスーパーの値札・パッケージの写真です。写っている商品を1つ読み取り、JSONで答えてください。\n'
+  +'- item: 商品名。短く一般的な名前（例: 鶏むね肉、キャベツ、豚こま切れ）。産地・ブランド・グラム数は含めない。'
+  +(names.length?'次の既存の商品名と同じ物なら、その表記をそのまま使う: '+names.join('、')+'\n':'\n')
+  +'- price: この商品1パック（1個）の販売価格。数字のみ。「100gあたり」などの単価表示ではない方。税込と税抜が並ぶ場合は税込の値。\n'
+  +'- price_includes_tax: price が税込ならtrue、税抜ならfalse、分からなければnull。\n'
+  +'- quantity と unit: 内容量。g・kg・ml・L・個（本・枚・パックも「個」）。量り売りなどで分からなければnull。\n'
+  +'- store: 店名が写っていればその名前。なければnull。\n'
+  +'読み取れない項目は推測せずnullにする。';
+}
+const readTag=blob=>askGemini(blob,promptText(),SCHEMA);
+async function askGemini(blob,prompt,schema){
+  const key=getKey();if(!key)return null;
+  const b64=await new Promise((ok,ng)=>{const r=new FileReader();r.onload=()=>ok(String(r.result).split(',')[1]);r.onerror=ng;r.readAsDataURL(blob)});
+  const body=JSON.stringify({contents:[{parts:[{text:prompt},{inline_data:{mime_type:'image/jpeg',data:b64}}]}],
+    generationConfig:{temperature:0,responseMimeType:'application/json',responseSchema:schema}});
+  // 混んでいる・見つからない・上限のときは次のモデルへ。一巡してもだめなら2秒待って、もう一巡だけする
+  const MODELS=['gemini-flash-latest','gemini-2.5-flash','gemini-2.5-flash-lite','gemini-flash-lite-latest'];
+  const SKIP=[404,429,500,503];
+  let last=null;
+  for(let round=0;round<2;round++){
+    if(round)await new Promise(ok=>setTimeout(ok,2000));
+    for(const model of MODELS){
+      let res;
+      try{
+        res=await fetch('https://generativelanguage.googleapis.com/v1beta/models/'+model+':generateContent',
+          {method:'POST',headers:{'Content-Type':'application/json','x-goog-api-key':key},body});
+      }catch(err){last=err;continue}
+      if(!res.ok){
+        const e=new Error('http');e.status=res.status;
+        try{const b=await res.json();e.detail=(b.error&&(b.error.status+': '+b.error.message))||''}catch(x){}
+        if(SKIP.includes(res.status)){last=e;continue}
+        throw e;
+      }
+      const j=await res.json();
+      const c=(j.candidates||[])[0];
+      const t=((c&&c.content&&c.content.parts)||[]).map(p=>p.text||'').join('');
+      if(!t){const e=new Error('empty');e.detail='答えが空でした（'+((c&&c.finishReason)||(j.promptFeedback&&j.promptFeedback.blockReason)||'理由不明')+'）';throw e}
+      try{return JSON.parse(t)}catch(x){const e=new Error('json');e.detail='答えを解釈できませんでした: '+t.slice(0,80);throw e}
+    }
+  }
+  throw last||new Error('model');
+}
+function applyTag(r){
+  const set=(id,v)=>{if(v===null||v===undefined||v==='')return;$(id).value=v;$(id).classList.add('auto')};
+  set('item',typeof r.item==='string'?r.item.trim():null);
+  set('price',r.price>0?r.price:null);
+  if(typeof r.price_includes_tax==='boolean'){$('tax').value=r.price_includes_tax?'in':'ex'}
+  set('qty',r.quantity>0?r.quantity:null);
+  if(UNITS_OK.includes(r.unit))$('unit').value=r.unit;
+  if(!$('store').value&&typeof r.store==='string')set('store',r.store.trim());
+}
+function showMsg(big,sm){
+  const v=$('verdict');v.className='';v.querySelectorAll('.sm').forEach(e=>e.remove());
+  v.querySelector('.big').textContent=big;
+  if(sm){const d=document.createElement('div');d.className='sm';d.textContent=sm;v.querySelector('.tx').append(d)}
+}
+function errText(e){
+  let m;
+  if(e.status===429)m='無料枠の上限です。しばらくしてからもう一度';
+  else if(e.status===401||e.status===403||(e.status===400&&/API key/i.test(e.detail||'')))m='APIキーを確認してください';
+  else if(e.status===404)m='モデルが見つかりません';
+  else if(e.status)m='Googleがエラーを返しました（'+e.status+'）';
+  else if(e.detail)m='読み取りに失敗しました';
+  else m='通信できませんでした';
+  return e.detail?m+'\n'+e.detail.slice(0,160):m;
+}
+const refreshGear=()=>$('tabSet').classList.toggle('keyed',!!getKey());
+$('tabSet').onclick=()=>{
+  const SET='（設定済み）';
+  const v=prompt('Gemini APIキー（空にしてOKで削除）',getKey()?SET:'');
+  if(v===null)return;
+  const t=v.trim();if(t===SET)return;
+  try{if(t)localStorage.setItem(GKEY,t);else localStorage.removeItem(GKEY)}catch(e){}
+  refreshGear();
+};
+refreshGear();
+
+let pending=null,pendingUrl=null;
+$('file').onchange=async e=>{
+  const f=e.target.files[0];e.target.value='';if(!f)return;
+  try{
+    pending=await shrink(f);
+    if(pendingUrl)URL.revokeObjectURL(pendingUrl);
+    pendingUrl=URL.createObjectURL(pending);
+    const p=$('prev');p.src=pendingUrl;p.hidden=false;
+  }catch(err){alert('写真を読み込めませんでした');return}
+  if(!getKey()){showMsg('APIキーが入っていないのだ','右上の⚙で入れると、写真から読み取れるのだ');return}
+  showMsg('読み取り中…');
+  try{
+    document.querySelectorAll('input.auto').forEach(i=>i.classList.remove('auto'));
+    const r=await readTag(pending);
+    if(r)applyTag(r);
+    updateVerdict();
+  }catch(err){showMsg('読み取れませんでした',errText(err))}
+};
+['item','price','tax','qty','unit'].forEach(id=>{
+  const on=e=>{e.target.classList.remove('auto');updateVerdict()};
+  $(id).addEventListener('input',on);$(id).addEventListener('change',on);
+});
+$('store').addEventListener('input',e=>e.target.classList.remove('auto'));
+// 品名を選んだら、前回の単位を引き継ぐ
+$('item').addEventListener('change',()=>{
+  const last=[...recs].reverse().find(r=>sameItem(r.item,$('item').value));
+  if(last){$('unit').value=last.unit;if(!$('store').value&&!pos)$('store').value=last.store}
+  updateVerdict();
+});
+let lastStore='';try{lastStore=localStorage.getItem(KEY+'-store')||''}catch(e){}
+$('store').value=lastStore;
+
+// ---- 近くの店を自動で入れる（位置は端末の中だけ。Geminiには送らない） ----
+let pos=null,storeDirty=false;
+function locate(){
+  if(!navigator.geolocation)return Promise.resolve(null);
+  return new Promise(ok=>navigator.geolocation.getCurrentPosition(
+    p=>{pos={lat:p.coords.latitude,lng:p.coords.longitude,acc:p.coords.accuracy,ts:Date.now()};ok(pos)},
+    ()=>ok(null),{enableHighAccuracy:false,timeout:8000,maximumAge:60000}));
+}
+const rad=x=>x*Math.PI/180;
+function dist(a,b){
+  const s=Math.sin(rad(b.lat-a.lat)/2)**2+Math.cos(rad(a.lat))*Math.cos(rad(b.lat))*Math.sin(rad(b.lng-a.lng)/2)**2;
+  return 12742000*Math.asin(Math.sqrt(s));
+}
+// 事前に登録した店の場所（stores.json。ページ全体で1回だけ読む）
+const presetList=()=>window.ZPRESETS||[];
+function storeLocs(){
+  // 同じ店名でも、記録した場所を全部覚える（別の店舗でも自動入力できる）。約10mごとに1つへまとめる
+  const m=new Map();
+  for(const s of presetList())m.set(s.store+'|'+s.lat.toFixed(4)+'|'+s.lng.toFixed(4),{store:s.store,lat:s.lat,lng:s.lng});
+  for(const r of recs){
+    if(typeof r.lat!=='number'||typeof r.lng!=='number')continue;
+    const s=r.store.trim(),k=s+'|'+r.lat.toFixed(4)+'|'+r.lng.toFixed(4);
+    if(!m.has(k))m.set(k,{store:s,lat:r.lat,lng:r.lng});
+  }
+  return [...m.values()];
+}
+// 位置の誤差が大きいときほど広めに見る（60〜150m）。近い順の店名（重複なし）
+function nearbyStores(p){
+  const R=Math.min(150,Math.max(60,p.acc*1.5)),m=new Map();
+  for(const s of storeLocs()){const d=dist(p,s);if(d<=R&&(!m.has(s.store)||d<m.get(s.store)))m.set(s.store,d)}
+  return [...m].sort((a,b)=>a[1]-b[1]).map(x=>x[0]);
+}
+function showChips(names){
+  const box=$('storeChips');box.textContent='';box.style.display=names.length?'flex':'none';
+  for(const n of names.slice(0,4)){
+    const b=document.createElement('button');b.type='button';b.textContent=n;
+    b.style.cssText='padding:6px 12px;font-size:13px;border-radius:99px;box-shadow:none;background:var(--card);color:var(--gd);border:2px solid var(--acc)';
+    b.onclick=()=>{const el=$('store');el.value=n;el.classList.remove('auto');storeDirty=true;showChips([]);updateVerdict()};
+    box.append(b);
+  }
+}
+// 家の位置（この端末の中だけ。バックアップにも入れない）。家にいる間は店を自動入力しない
+const HOME_KEY='price-compare-home';
+const getHome=()=>{try{const h=JSON.parse(localStorage.getItem(HOME_KEY)||'null');return h&&typeof h.lat==='number'&&typeof h.lng==='number'?h:null}catch(e){return null}};
+const refreshHome=()=>{$('homeSet').textContent=getHome()?'🏠 家（設定済み）':'🏠 家'};
+$('homeSet').onclick=async()=>{
+  if(getHome()){
+    if(confirm('家の位置を消しますか？'))try{localStorage.removeItem(HOME_KEY)}catch(e){}
+    refreshHome();return;
+  }
+  const p=await locate();
+  if(!p||p.acc>100){alert('位置がうまく取れませんでした。屋外か窓の近くで、もう一度押してください');return}
+  if(!confirm('今いる場所を家にしますか？（この端末の中だけに保存。GitHubにも送りません）'))return;
+  try{localStorage.setItem(HOME_KEY,JSON.stringify({lat:Math.round(p.lat*1e5)/1e5,lng:Math.round(p.lng*1e5)/1e5}))}catch(e){alert('保存できませんでした')}
+  refreshHome();autoStore();
+};
+refreshHome();
+async function autoStore(){
+  const p=await locate();
+  if(!p||p.acc>300||storeDirty)return;
+  const home=getHome();
+  if(home&&dist(p,home)<=50){const e=$('store');e.value='';e.classList.remove('auto');showChips([]);updateVerdict();return}
+  const names=nearbyStores(p),el=$('store');
+  if(names.length===1){el.value=names[0];el.classList.add('auto');showChips([])}
+  else{el.value='';el.classList.remove('auto');showChips(names)} // 複数なら自動入力せず、候補から選ぶ
+  updateVerdict();
+}
+$('store').addEventListener('input',()=>{storeDirty=true;updateAppLink()});
+
+$('save').onclick=async()=>{
+  const item=$('item').value.trim(),store=$('store').value.trim(),c=current();
+  if(!item||!store||!c){alert('商品・お店・値段・量を入れてください');return}
+  const id=Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+  let photo=null;
+  if(pending){try{await putPhoto(id,pending);photo=id}catch(e){alert('写真は保存できませんでした（記録は保存します）')}}
+  const here=pos&&Date.now()-pos.ts<600000?pos:await locate();
+  const rec={id,item,store,price:c.price,qty:c.qty,unit:c.unit,photo,ts:Date.now()};
+  if(here&&here.acc<=300){rec.lat=Math.round(here.lat*1e5)/1e5;rec.lng=Math.round(here.lng*1e5)/1e5}
+  recs.push(rec);
+  storeDirty=false;
+  persist();
+  try{localStorage.setItem(KEY+'-store',store)}catch(e){}
+  ['item','price','qty'].forEach(k=>$(k).value='');
+  document.querySelectorAll('input.auto').forEach(i=>i.classList.remove('auto'));
+  pending=null;$('prev').hidden=true;$('prev').removeAttribute('src');
+  fillLists();updateVerdict();
+  const b=$('save');b.textContent='記録したのだ';setTimeout(()=>b.textContent='記録するのだ',1200);
+};
+
+// ---- タブ ----
+function tab(name){
+  $('secCheck').hidden=name!=='check';$('secList').hidden=name!=='p_list';$('secRcpt').hidden=name!=='rcpt';
+  $('tabCheck').classList.toggle('on',name==='check');$('tabList').classList.toggle('on',name==='p_list');$('tabRcpt').classList.toggle('on',name==='rcpt');
+  if(name==='p_list')renderList();
+}
+$('tabCheck').onclick=()=>tab('check');
+$('tabList').onclick=()=>tab('p_list');
+$('tabRcpt').onclick=()=>tab('rcpt');
+
+// ---- レシート読み取り（試験：読み取った結果を見るだけ。記録には入れない） ----
+const RSCHEMA={type:'OBJECT',properties:{
+  store:{type:'STRING',nullable:true},
+  date:{type:'STRING',nullable:true},
+  total:{type:'NUMBER',nullable:true},
+  items:{type:'ARRAY',items:{type:'OBJECT',properties:{
+    raw:{type:'STRING'},name:{type:'STRING'},price:{type:'NUMBER'},
+    quantity:{type:'NUMBER',nullable:true},unit:{type:'STRING',nullable:true,enum:UNITS_OK},
+    kind:{type:'STRING',enum:['品目','値引き','小計・税・合計・支払い','その他']}}}}}};
+const RPROMPT='日本のスーパーのレシートの写真です。全行を読み取り、JSONで答えてください。\n'
+  +'- store: 店名。date: 日付（YYYY-MM-DD）。total: 合計金額（税込）。\n'
+  +'- items: 品目の行ごとに1要素。raw は印字そのまま（半角カナ含む）、name は一般的な商品名に直したもの（例: ﾎｳﾚﾝｿｳ→ほうれん草）。\n'
+  +'- price: その行の金額（数字のみ）。値引き行はマイナスで kind を「値引き」。\n'
+  +'- quantity と unit: 行に個数やグラム数が印字されていればその値。なければnull。\n'
+  +'- kind: 品目／値引き／小計・税・合計・支払い／その他 のどれか。\n'
+  +'読み取れない項目は推測せずnullにする。';
+$('rfile').onchange=async e=>{
+  const f=e.target.files[0];e.target.value='';if(!f)return;
+  const out=$('rout');out.textContent='';
+  if(!getKey()){$('rmsg').textContent='右上の⚙でAPIキーを入れてください';return}
+  $('rmsg').textContent='読み取り中…';
+  try{
+    const r=await askGemini(await shrink(f,2000),RPROMPT,RSCHEMA);
+    const items=(r.items||[]),buy=items.filter(i=>i.kind==='品目');
+    const sum=items.filter(i=>i.kind==='品目'||i.kind==='値引き').reduce((a,i)=>a+(+i.price||0),0);
+    $('rmsg').textContent=(r.store||'店名なし')+' ・ '+(r.date||'日付なし')+' ・ 合計 '+(r.total!=null?yen(r.total)+'円':'—')
+      +'\n品目 '+buy.length+'行 ／ 品目と値引きの合計 '+yen(sum)+'円'+(r.total!=null&&Math.abs(sum-r.total)>1?'（合計と '+yen(sum-r.total)+'円ずれ）':'（合計と一致）');
+    const card=document.createElement('div');card.className='card';
+    for(const i of items){
+      const row=document.createElement('div');row.className='hist';
+      const s=document.createElement('span');s.style.flex='1';
+      s.textContent=(i.kind==='品目'?'':'['+i.kind+'] ')+i.name+'（'+i.raw+'）'+(i.quantity?' '+i.quantity+(i.unit||''):'');
+      const p=document.createElement('b');p.textContent=yen(i.price);
+      row.append(s,p);card.append(row);
+    }
+    out.append(card);
+  }catch(err){$('rmsg').textContent='読み取れませんでした\n'+errText(err)}
+};
+
+fillLists();updateVerdict();
+if(window.ZAPP==='p')autoStore();
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&window.ZAPP==='p'){storeDirty=false;autoStore()}});
+if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(()=>{});
+
+function bkCollect(){return {recs}}
+function bkEmpty(){return !recs.length}
+// 足りない記録だけ加える（今の記録は消さない）。写真は含まれない
+function bkApply(d){
+  let n=0;
+  for(const x of (d.recs||[])){if(x&&x.id&&!recs.some(y=>y.id===x.id)){recs.push(x);n++}}
+  persist();fillLists();updateVerdict();
+  if(!$('secList').hidden)renderList();
+  return n+'件';
+}
+
+// ---- バックアップ（GitHub の非公開リポジトリ backup-data）----
+// トークン（Fine-grained・このリポジトリの Contents だけ）は端末にだけ置く。2つのアプリで共有。写真は含めない
+const BK={owner:'ageargfbv',repo:'backup-data',tokKey:'backup-gh-token',file:'price-compare.json',lastKey:'backup-last-price-compare'};
+const bkTok=()=>{try{return localStorage.getItem(BK.tokKey)||''}catch(e){return ''}};
+const bkGet=k=>{try{return localStorage.getItem(k)||''}catch(e){return ''}};
+const bkSet=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
+const b64=s=>{const b=new TextEncoder().encode(s);let x='';for(let i=0;i<b.length;i+=0x8000)x+=String.fromCharCode.apply(null,b.subarray(i,i+0x8000));return btoa(x)};
+const unb64=s=>{const x=atob(s.replace(/\s/g,'')),b=new Uint8Array(x.length);for(let i=0;i<x.length;i++)b[i]=x.charCodeAt(i);return new TextDecoder().decode(b)};
+const bkHash=s=>{let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return (h>>>0).toString(36)+':'+s.length};
+const bkApi=(method,path,body)=>fetch('https://api.github.com/repos/'+BK.owner+'/'+BK.repo+path,{method,
+  headers:{'Authorization':'Bearer '+bkTok(),'Accept':'application/vnd.github+json','Content-Type':'application/json'},
+  body:body?JSON.stringify(body):undefined});
+const bkErr=e=>{const s=e&&e.status;return s===401||s===403?'トークンを確認してください（'+s+'）':s===404?'トークンの対象に backup-data が入っていません（404）':s?'保存できませんでした（'+s+'）':'通信できませんでした'};
+async function bkRemote(){
+  const r=await bkApi('GET','/contents/'+BK.file+'?t='+Date.now());
+  if(r.status===404)return null;
+  if(!r.ok){const e=new Error('http');e.status=r.status;throw e}
+  const j=await r.json();
+  return {sha:j.sha,payload:JSON.parse(unb64(j.content))};
+}
+function bkStatus(msg){
+  const el=document.getElementById('p_bkSt');if(!el)return;
+  if(msg){el.textContent='☁ '+msg;return}
+  const at=+bkGet(BK.lastKey+'-at');
+  el.textContent=!bkTok()?'☁ バックアップ：未設定':at?'☁ 最後の保存 '+new Date(at).toLocaleString('ja-JP',{month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}):'☁ つながっています（まだ保存していません）';
+}
+let bkBusy=false,bkTimer=0,bkDirty=false;
+// データが変わったら、少し待ってから自動で送る（続けて変えたときは最後の1回だけ）
+function bkSoon(){try{if(!bkTok())return;bkDirty=true;clearTimeout(bkTimer);bkTimer=setTimeout(()=>bkPush(),8000)}catch(e){}}   // 起動直前（下の定義より前）に呼ばれても落ちない
+async function bkPush(force){
+  if(!bkTok()||bkBusy)return;
+  clearTimeout(bkTimer);bkDirty=false;
+  const data=bkCollect(),body=JSON.stringify(data),hash=bkHash(body);
+  if(!force&&bkGet(BK.lastKey)===hash)return;
+  bkBusy=true;bkStatus('保存中…');
+  try{
+    const rem=await bkRemote();
+    const put=sha=>bkApi('PUT','/contents/'+BK.file,{message:'バックアップ '+new Date().toLocaleString('ja-JP'),
+      content:b64(JSON.stringify({app:'price-compare',savedAt:Date.now(),data})),...(sha?{sha}:{})});
+    let r=await put(rem&&rem.sha);
+    if(r.status===409||r.status===422){const rem2=await bkRemote();r=await put(rem2&&rem2.sha)}
+    if(!r.ok){const e=new Error('http');e.status=r.status;throw e}
+    bkSet(BK.lastKey,hash);bkSet(BK.lastKey+'-at',String(Date.now()));bkStatus();
+  }catch(e){bkStatus(bkErr(e));bkDirty=true}
+  finally{bkBusy=false}
+}
+async function bkRestore(auto){
+  if(!bkTok()){bkStatus('先に「設定」でトークンを入れてください');return}
+  try{
+    const rem=await bkRemote();
+    if(!rem){bkStatus('保存がまだありません');return}
+    const when=new Date(rem.payload.savedAt).toLocaleString('ja-JP');
+    if(!confirm('GitHubの保存（'+when+'）を取り込みますか？\n今の内容は消えず、足りない分が加わります。')){if(auto)bkSet('backup-declined-price-compare',String(Date.now()));return}
+    const n=bkApply(rem.payload.data||{});
+    bkSet(BK.lastKey,'');bkStatus('取り込みました（'+n+'）');
+  }catch(e){bkStatus(bkErr(e))}
+}
+async function bkSetup(){
+  const SET='（設定済み）';
+  const v=prompt('GitHubのトークン（空にすると削除）',bkTok()?SET:'');
+  if(v===null)return;
+  const t=v.trim();if(t===SET)return;
+  if(!t){try{localStorage.removeItem(BK.tokKey)}catch(e){}bkStatus();return}
+  bkSet(BK.tokKey,t);bkStatus('確認中…');
+  try{
+    const r=await bkApi('GET','');
+    if(!r.ok){const e=new Error('http');e.status=r.status;throw e}
+    bkStatus('つながりました');
+    if(bkEmpty())await bkRestore(false);else await bkPush(true);
+  }catch(e){bkStatus(bkErr(e))}
+}
+document.getElementById('p_bkSet').onclick=bkSetup;
+document.getElementById('p_bkNow').onclick=()=>bkPush(true);
+document.getElementById('p_bkRestore').onclick=()=>bkRestore(false);
+// アプリを離れるとき、送っていない変更があれば送る
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&bkDirty)bkPush()});
+bkStatus();
+// データが空なのに保存がある（消えたあと）ときは、取り込みを勧める。断ったら1日は聞かない
+if(bkTok()&&bkEmpty()&&Date.now()-(+bkGet('backup-declined-price-compare')||0)>864e5)bkRestore(true);
+// 買い物メモ側で記録が増えたあとに、この画面へ戻ったときの読み直し
+window.ZPRICE={show(){
+  try{recs=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){}
+  fillLists();updateVerdict();
+  if(!$('secList').hidden)renderList();
+  storeDirty=false;autoStore();
+}};
+
+})();
+</script>
+<script>
+(()=>{
+  const el={m:document.getElementById('appM'),p:document.getElementById('appP')};
+  const tab={m:document.getElementById('tM'),p:document.getElementById('tP')};
+  const y={m:0,p:0};
+  function showApp(k){
+    if(window.ZAPP===k)return;
+    y[window.ZAPP]=window.scrollY;
+    window.ZAPP=k;
+    for(const a of ['m','p']){el[a].hidden=a!==k;tab[a].classList.toggle('cur',a===k)}
+    document.getElementById('zTabs').classList.toggle('p',k==='p');
+    (k==='m'?window.ZMEMO:window.ZPRICE).show();
+    window.scrollTo(0,y[k]);
+  }
+  tab.m.onclick=e=>{e.preventDefault();showApp('m')};
+  tab.p.onclick=e=>{e.preventDefault();showApp('p')};
+  // 店の位置の事前登録（店名と座標だけの公開情報）。1回だけ読んで、両方の画面で使う
+  fetch('stores.json').then(r=>r.ok?r.json():[]).then(j=>{
+    if(!Array.isArray(j))return;
+    window.ZPRESETS=j.filter(s=>s&&s.store&&typeof s.lat==='number'&&typeof s.lng==='number');
+    (window.ZAPP==='m'?window.ZMEMO:window.ZPRICE).show();
+  }).catch(()=>{});
+  if('serviceWorker' in navigator)addEventListener('load',()=>navigator.serviceWorker.register('sw.js'));
+})();
+</script>
+</body>
+</html>
